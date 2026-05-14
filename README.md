@@ -1,8 +1,8 @@
-<p align="left"><img src="https://github.com/user-attachments/assets/a31b3a69-04e0-4ccd-8683-35a77ec10094" width="305" height="354"></p>
+<p align="left"><img src="https://github.com/user-attachments/assets/6e93c289-df56-417f-bf11-8dd2bdc2dd7b" width="305" height="354"></p>
 <p align="left">for Steam.</p>
 
-[![kofi](https://github.com/user-attachments/assets/1b855598-ce2c-4dd7-a795-6347311e2baf)](https://ko-fi.com/saiyajink)
-[![discord](https://github.com/user-attachments/assets/2e7025bc-7311-4364-85c2-c1478686b312)](https://discord.gg/2qnAq8B69u) 
+[![kofi](https://github.com/user-attachments/assets/50f81abc-dba5-4934-a894-8d6d993de1c3)](https://ko-fi.com/saiyajink)
+[![discord](https://github.com/user-attachments/assets/bf718d8d-b59c-47e4-affd-f5cc4274139e)](https://discord.gg/2qnAq8B69u) 
 
 <hr>
 
