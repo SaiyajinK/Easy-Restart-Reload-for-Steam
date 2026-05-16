@@ -6,27 +6,41 @@
   const ITEM_MARKER = "data-restart-steam-root-item";
 
   const TEXT = {
-    fr: { restart: "Redémarrer Steam", reload: "Recharger l’interface" },
-    en: { restart: "Restart Steam", reload: "Reload UI" },
-    de: { restart: "Steam neu starten", reload: "Oberfläche neu laden" },
-    es: { restart: "Reiniciar Steam", reload: "Recargar interfaz" },
-    it: { restart: "Riavvia Steam", reload: "Ricarica interfaccia" },
-    pt: { restart: "Reiniciar Steam", reload: "Recarregar interface" },
-    br: { restart: "Reiniciar Steam", reload: "Recarregar interface" },
-    ru: { restart: "Перезапустить Steam", reload: "Перезагрузить интерфейс" },
-    ja: { restart: "Steam を再起動", reload: "UI を再読み込み" },
-    ko: { restart: "Steam 재시작", reload: "UI 새로고침" },
-    schinese: { restart: "重启 Steam", reload: "重新加载界面" },
-    tchinese: { restart: "重新啟動 Steam", reload: "重新載入介面" },
-    polish: { restart: "Uruchom ponownie Steam", reload: "Przeładuj interfejs" },
-    turkish: { restart: "Steam’i yeniden başlat", reload: "Arayüzü yenile" },
-    dutch: { restart: "Steam opnieuw starten", reload: "Interface herladen" }
+	schinese: { restart: "重启 Steam", reload: "重新加载界面" },
+	tchinese: { restart: "重新啟動 Steam", reload: "重新載入介面" },
+	japanese: { restart: "Steam を再起動", reload: "UI を再読み込み" },
+	koreana: { restart: "Steam 재시작", reload: "UI 새로고침" },
+	thai: { restart: "รีสตาร์ท Steam", reload: "โหลดอินเทอร์เฟซใหม่" },
+	bulgarian: { restart: "Рестартирай Steam", reload: "Презареди интерфейса" },
+	czech: { restart: "Restartovat Steam", reload: "Znovu načíst rozhraní" },
+	danish: { restart: "Genstart Steam", reload: "Genindlæs brugerfladen" },
+	german: { restart: "Steam neu starten", reload: "Oberfläche neu laden" },
+	english: { restart: "Restart Steam", reload: "Reload UI" },
+	spanish: { restart: "Reiniciar Steam", reload: "Recargar interfaz" },
+	latam: { restart: "Reiniciar Steam", reload: "Recargar interfaz" },
+	greek: { restart: "Επανεκκίνηση Steam", reload: "Επαναφόρτωση διεπαφής" },
+	french: { restart: "Redémarrer Steam", reload: "Recharger l’interface" },
+	indonesian: { restart: "Mulai ulang Steam", reload: "Muat ulang antarmuka" },
+	italian: { restart: "Riavvia Steam", reload: "Ricarica interfaccia" },
+	hungarian: { restart: "Steam újraindítása", reload: "Felület újratöltése" },
+	dutch: { restart: "Steam opnieuw starten", reload: "Interface herladen" },
+	norwegian: { restart: "Start Steam på nytt", reload: "Last inn grensesnittet på nytt" },
+	polish: { restart: "Uruchom ponownie Steam", reload: "Przeładuj interfejs" },
+	portuguese: { restart: "Reiniciar Steam", reload: "Recarregar interface" },
+	brazilian: { restart: "Reiniciar Steam", reload: "Recarregar interface" },
+	romanian: { restart: "Repornește Steam", reload: "Reîncarcă interfața" },
+	russian: { restart: "Перезапустить Steam", reload: "Перезагрузить интерфейс" },
+	finnish: { restart: "Käynnistä Steam uudelleen", reload: "Lataa käyttöliittymä uudelleen" },
+	swedish: { restart: "Starta om Steam", reload: "Ladda om gränssnittet" },
+	turkish: { restart: "Steam’i yeniden başlat", reload: "Arayüzü yenile" },
+	vietnamese: { restart: "Khởi động lại Steam", reload: "Tải lại giao diện" },
+	ukrainian: { restart: "Перезапустити Steam", reload: "Перезавантажити інтерфейс" }
   };
 
   async function getLanguage(documentRef) {
     try {
       const result =
-        SteamClient?.Settings?.GetCurrentLanguage?.();
+        window.SteamClient?.Settings?.GetCurrentLanguage?.();
 
       const steamLanguage =
         result && typeof result.then === "function"
@@ -52,31 +66,19 @@
   }
 
   async function getLanguageKey(documentRef) {
-    const language = await getLanguage(documentRef);
+	const language = await getLanguage(documentRef);
 
-    if (language.includes("fr") || language.includes("french")) return "fr";
-    if (language.includes("en") || language.includes("english")) return "en";
-    if (language.includes("de") || language.includes("german")) return "de";
-    if (language.includes("es") || language.includes("spanish")) return "es";
-    if (language.includes("it") || language.includes("italian")) return "it";
-    if (language.includes("pt-br") || language.includes("brazilian")) return "br";
-    if (language.includes("pt") || language.includes("portuguese")) return "pt";
-    if (language.includes("ru") || language.includes("russian")) return "ru";
-    if (language.includes("ja") || language.includes("japanese")) return "ja";
-    if (language.includes("ko") || language.includes("koreana")) return "ko";
-    if (language.includes("zh-cn") || language.includes("schinese")) return "schinese";
-    if (language.includes("zh-tw") || language.includes("tchinese")) return "tchinese";
-    if (language.includes("pl") || language.includes("polish")) return "polish";
-    if (language.includes("tr") || language.includes("turkish")) return "turkish";
-    if (language.includes("nl") || language.includes("dutch")) return "dutch";
-
-    return "en";
+	if (TEXT[language]) {
+	  return language;
   }
+
+  return "english";
+}
 
   async function translate(key, documentRef) {
     const languageKey = await getLanguageKey(documentRef);
 
-    return TEXT[languageKey]?.[key] || TEXT.en[key];
+    return TEXT[languageKey]?.[key] || TEXT.english[key];
   }
 
   function createMenuItem(template, label, marker, onClick) {
@@ -135,7 +137,7 @@
       await translate("restart", documentRef),
       "restart",
       function () {
-        SteamClient.User.StartRestart(true);
+        window.SteamClient?.User?.StartRestart?.(true);
       }
     );
 
@@ -150,6 +152,13 @@
 
     parent.insertBefore(restartItem, quitItem);
     parent.insertBefore(reloadItem, quitItem);
+	
+	const separator = document.createElement("div");
+	separator.style.height = ".5px";
+	separator.style.background = "rgba(19, 19, 19, .85)";
+	separator.style.pointerEvents = "none";
+
+	parent.insertBefore(separator, quitItem);
   }
 
   function onWindowCreated(windowInfo) {
