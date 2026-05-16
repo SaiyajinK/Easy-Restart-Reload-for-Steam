@@ -19,7 +19,7 @@ Useful for refreshing the modern Steam UI, reloading modified themes/plugins, or
 
 ### 🌍 Support for multiple languages :
 
-- 🇫🇷 🇬🇧 🇩🇪 🇪🇸 🇮🇹 🇵🇹 🇧🇷 🇷🇺 🇯🇵 🇰🇷 🇨🇳 🇹🇼 🇵🇱 🇹🇷 🇳🇱 
+- 🇫🇷 🇬🇧 🇩🇪 🇪🇸 🇮🇹 🇵🇹 🇧🇷 🇷🇺 🇯🇵 🇰🇷 🇨🇳 🇹🇼 🇵🇱 🇹🇷 🇳🇱 🇧🇬 🇨🇿 🇩🇰 🇬🇷 🇫🇮 🇭🇺 🇮🇩 🇳🇴 🇷🇴 🇸🇪 🇹🇭 🇺🇦 🇻🇳🌎(Latam)
 
 > The plugin will be automatically translated into your Steam client's language.
 
