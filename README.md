@@ -1,59 +1,120 @@
-<p align="left"><img src="https://github.com/user-attachments/assets/6e93c289-df56-417f-bf11-8dd2bdc2dd7b" width="305" height="354"></p>
-<p align="left">for Steam.</p>
+<div align="center">
 
-[![kofi](https://github.com/user-attachments/assets/50f81abc-dba5-4934-a894-8d6d993de1c3)](https://ko-fi.com/saiyajink)
-[![discord](https://github.com/user-attachments/assets/bf718d8d-b59c-47e4-affd-f5cc4274139e)](https://discord.gg/2qnAq8B69u) 
+<p align="center"><img width="472" height="58" alt="errfs" src="https://github.com/user-attachments/assets/f41bd855-f681-4b4d-a004-946f3ba722a4" /> <img width="75" height="75" alt="refresh_reload" src="https://github.com/user-attachments/assets/4a6710c9-be2d-43bd-8407-75cdaaa1347d" /></p>
+<p align="center">for Steam.</p>
 
-<hr>
+<p align="center">
+<a href="https://discord.gg/2qnAq8B69u">
+  <img src="https://img.shields.io/badge/Discord-5865F2?style=flat&logo=discord&labelColor=262626&color=5865F2&logoColor=FFFFFF"></a>
+&nbsp;
+<a href="https://ko-fi.com/saiyajink">
+  <img src="https://img.shields.io/badge/Ko--fi-FF5E5B?style=flat&labelColor=262626&color=FF5E5B&logo=kofi&logoColor=FFFFFF"></a>
+&nbsp;
+<a href="https://github.com/SaiyajinK/Easy-Restart-Reload-for-Steam">
+  <img src="https://img.shields.io/github/stars/SaiyajinK/Easy-Restart-Reload-for-Steam?style=flat&label=%E2%98%85&logo=github&color=FFD43B&labelColor=262626&logoColor=FFFFFF"></a>
+</p>
+&nbsp;
+  <img width="700" height="1" src="https://via.placeholder.com/700x1/262626/262626">
+</p>
 
-A simple [Millennium](https://steambrew.app/) plugin that adds two new entries to the root menu :
+<p align="center">
+  A simple Millennium plugin that adds Restart and Reload to Steam root menu.<br>
+</p>
 
-- `Restart Steam` :
-> Fully restarts the Steam client using Steam’s native restart API.
-This safely closes and relaunches Steam without requiring the user to manually exit the client.
-- `Reload Steam` :
-> Reloads the current Steam interface instantly without restarting the client process.
-Useful for refreshing the modern Steam UI, reloading modified themes/plugins, or fixing temporary frontend rendering issues.
+</p>
+  <img width="700" height="1" src="https://via.placeholder.com/700x1/262626/262626">
+</p>
 
-<hr>
+### ✨ Features :
 
-### 🌍 Support for multiple languages :
+| Feature | Description |
+|----------|-------------|
+| 🔄 Quick Restart | Fully restarts Steam in one click |
+| 🔃 Fast Reload | Reloads Steam faster than a full reboot |
+| 🪶 Lightweight | No unnecessary background processes |
+| 🖥️ User Friendly | Simple and straightforward usage |
+| 🚀 Easy Setup | Ready in seconds |
 
-- 🇫🇷 🇬🇧 🇩🇪 🇪🇸 🇮🇹 🇵🇹 🇧🇷 🇷🇺 🇯🇵 🇰🇷 🇨🇳 🇹🇼 🇵🇱 🇹🇷 🇳🇱 🇧🇬 🇨🇿 🇩🇰 🇬🇷 🇫🇮 🇭🇺 🇮🇩 🇳🇴 🇷🇴 🇸🇪 🇹🇭 🇺🇦 🇻🇳🌎(Latam)
+</p>
+  <img width="700" height="1" src="https://via.placeholder.com/700x1/262626/262626">
+</p>
 
-> The plugin will be automatically translated into your Steam client's language.
+### 🌍 Language Support : 
 
-<hr>
+| 🇫🇷 | 🇬🇧 | 🇩🇪 | 🇪🇸 | 🇮🇹 | 🇵🇹 | 🇧🇷 | 🇷🇺 | 🇯🇵 | 🇰🇷 |
+|------|------|------|------|------|------|------|------|------|------|
+| 🇨🇳 | 🇹🇼 | 🇵🇱 | 🇹🇷 | 🇳🇱 | 🇧🇬 | 🇨🇿 | 🇩🇰 | 🇬🇷 | 🇫🇮 |
+| 🇭🇺 | 🇮🇩 | 🇳🇴 | 🇷🇴 | 🇸🇪 | 🇹🇭 | 🇺🇦 | 🇻🇳 | 🌎 | ✅ |
 
-### ✅ Manual installation (for now) : 
-- Download the last version [here](https://github.com/SaiyajinK/Easy-Restart-Reload-for-Steam/releases).
-- Go to `C:\Program Files (x86)\Steam\millennium\` and open `plugins` folder.
-- Extract and copy `easy-restart-reload-for-steam` folder in the `plugins` folder.
-- Restart Steam and enable the plugin in Millennium settings.
+The plugin will be automatically translated into your Steam client's language.
 
-<hr>
+<p align="center">
+  <img width="700" height="1" src="https://via.placeholder.com/700x1/262626/262626">
+</p>
 
-### 🛠️ <ins>Tested and worked in this environnement </ins> : <br>
+### 📸 Preview :
 
-`Millennium : v3.0.0b24`<br>
+| <img width="341" height="361" alt="steamwebhelper_OO0y5ZWnGS" src="https://github.com/user-attachments/assets/f2add067-a8cd-4cc2-9ad1-2ec83f49ccfa" /> |
+| ------ |
 
-`Steam Beta Branch: Stable Client`<br>
-`Steam Version: 1778281814`<br>
-`Steam Client Build Date: Sat, May 9, 2026 01:41 UTC -08:00`<br>
-`Steam Web Build Date: Sat, May 9, 2026 00:34 UTC -08:00`<br>
-`Steam API Version: SteamClient023`<br>
+<p align="center">
+  <img width="700" height="1" src="https://via.placeholder.com/700x1/262626/262626">
+</p>
 
-<hr>
+### ✅ Manual Installation :
 
-### 👤 <ins>About</ins> : <br>
+| Step | Action |
+|--------|--------|
+| 1️⃣ | Download the latest release [here](https://github.com/SaiyajinK/Easy-Restart-Reload-for-Steam/releases) |
+| 2️⃣ | Navigate to `C:\Program Files (x86)\Steam\millennium\plugins\` |
+| 3️⃣ | Extract and copy the `easy-restart-reload-for-steam` folder into the `plugins` directory |
+| 4️⃣ | Restart Steam |
+| 5️⃣ | Enable the plugin from the Millennium settings |
+<br>
+<ins>NOTE</ins> : The plugin is currently available through manual installation only.<br> A request has been submitted for inclusion in the Millennium Plugin Repository and is awaiting review.
 
-I am neither a coder nor a developer, I have some knowledge after several years of practice and I do this in my free time when I have it. Be understanding if you encounter any bugs. <br><br>
-⚠️ Easy Restart Reload is a completely <ins>free plugin</ins>.  <br>
-💲 If someone pretends to be me and asks you for money to get the plugin, it is a fraud. <br>
+</p>
+  <img width="700" height="1" src="https://via.placeholder.com/700x1/262626/262626">
+</p>
 
-### 🌌 <ins>Do you like my work</ins> ? <br>
+### 🧪 Tested and worked in this environnement : 
 
-⭐ Add a star to my directory ! <br>
-💯 It's <ins>free</ins> and it gives me strength because I see that other people like my work. 🫡<br>
-![firefox_zkLiqn1vT8](https://github.com/user-attachments/assets/bfd45d2b-f5a3-40bf-9e9f-0e656be0b7c8) <br>
-☕ [Support me on Ko-fi](https://ko-fi.com/saiyajink) <br>
+| Component | Version |
+|-----------|----------|
+| Steam Client | 1779918128 |
+| Steam API | SteamClient023 |
+| Steam Channels | Stable & beta |
+| Millennium | Stable & beta |
+
+</p>
+  <img width="700" height="1" src="https://via.placeholder.com/700x1/262626/262626">
+</p>
+
+### ❤️ Support :
+
+| Platform | Action |
+|----------|----------|
+| ⭐ GitHub | Star the repository |
+| 🐞 Bug Reports | Report bugs through [GitHub](https://github.com/SaiyajinK/Easy-Restart-Reload-for-Steam/issues) or [Discord](https://discord.com/channels/1367109896419676203/1379085575893815367) |
+| ☕ Ko-fi | Support the project on [Ko-fi](https://ko-fi.com/saiyajink) |
+
+<p align="center">
+  <img width="700" height="1" src="https://via.placeholder.com/700x1/262626/262626">
+</p>
+
+### 👤 About :
+
+> Easy Restart / Reload is a lightweight Millennium plugin that lets you quickly restart or reload Steam directly from the client.
+>
+> It provides a fast and convenient way to refresh Steam without manually closing and relaunching it.
+
+<p align="center">
+  <img width="700" height="1" src="https://via.placeholder.com/700x1/262626/262626">
+</p>
+
+### ⚠️ Disclaimer :
+
+> 🕊️ Easy Restart / Reload is completely free plugin.<br>
+>
+> 💲 If someone asks you to pay for access to this plugin while pretending to be the author, it is a scam.
+</div>
