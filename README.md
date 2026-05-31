@@ -71,7 +71,15 @@ The plugin will be automatically translated into your Steam client's language.
 | 4️⃣ | Restart Steam |
 | 5️⃣ | Enable the plugin from the Millennium settings |
 <br>
-<ins>NOTE</ins> : The plugin is currently available through manual installation only.<br> A request has been submitted for inclusion in the Millennium Plugin Repository and is awaiting review.
+<ins>NOTE</ins> : The plugin is currently available through manual installation only.<br> A <a href="https://github.com/SteamClientHomebrew/PluginDatabase/pull/167">request</a> has been submitted for inclusion in the Millennium Plugin Repository and is awaiting review.
+
+</p>
+  <img width="700" height="1" src="https://via.placeholder.com/700x1/262626/262626">
+</p>
+
+> ### 💡 **<ins>Recommended addition</ins> :**<br><br>
+> For the best experience, pair **Easy Restart / Reload** with [Minimal Dark for Steam](https://github.com/SaiyajinK/Minimal-Dark-for-Steam).
+> Both are designed to work seamlessly together.
 
 </p>
   <img width="700" height="1" src="https://via.placeholder.com/700x1/262626/262626">
