@@ -77,9 +77,9 @@ The plugin will be automatically translated into your Steam client's language.
   <img width="700" height="1" src="https://via.placeholder.com/700x1/262626/262626">
 </p>
 
-> ### 💡 **<ins>Recommended addition</ins> :**<br><br>
-> For the best experience, pair **Easy Restart / Reload** with [Minimal Dark for Steam](https://github.com/SaiyajinK/Minimal-Dark-for-Steam).
-> Both are designed to work seamlessly together.
+> 💡 **<ins>Recommended addition</ins> :**<br><br>
+> For the best experience, pair **Easy Restart / Reload** with [Minimal Dark for Steam](https://github.com/SaiyajinK/Minimal-Dark-for-Steam).<br>
+> Both are designed to work seamlessly together (*The plugin will also work on other skins available on Millennium*).
 
 </p>
   <img width="700" height="1" src="https://via.placeholder.com/700x1/262626/262626">
