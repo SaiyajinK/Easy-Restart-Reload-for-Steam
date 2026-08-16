@@ -1,7 +1,9 @@
 {
+  "$schema": "https://raw.githubusercontent.com/SteamClientHomebrew/Millennium/main/src/sys/plugin-schema.json",
   "name": "easy-restart-reload-for-steam",
   "common_name": "Easy restart / reload for Steam",
   "description": "Adds Restart and Refresh options to the Steam root menu.",
-  "version": "1.2",
+  "version": "1.2.0",
+  "useBackend": true,
   "backendType": "lua"
 }
