@@ -153,7 +153,7 @@ async function injectRootMenuItems(
     quitItem,
     await translate("reload", documentRef),
     "reload",
-    () => documentRef.defaultView?.location.reload(),
+    () => window.location.reload(),
   );
 
   const separator = documentRef.createElement("div");
