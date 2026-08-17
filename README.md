@@ -61,6 +61,17 @@ The plugin will be automatically translated into your Steam client's language.
   <img width="700" height="1" src="https://via.placeholder.com/700x1/262626/262626">
 </p>
 
+### ✅ Millennium Installation :
+
+| Step | Action |
+|--------|--------|
+| 1️⃣ | Root menu ➡️ Millennium ➡️ Plugins tab ➡️ Install a plugin |
+| 2️⃣ | Enter the Plugin ID : `af2b8c89d682` |
+| 3️⃣ | Click Download and Install |
+| 4️⃣ | Restart Steam |
+
+<br>
+
 ### ✅ Manual Installation :
 
 | Step | Action |
@@ -71,7 +82,7 @@ The plugin will be automatically translated into your Steam client's language.
 | 4️⃣ | Restart Steam |
 | 5️⃣ | Enable the plugin from the Millennium settings |
 <br>
-<ins>NOTE</ins> : The plugin is currently available through manual installation only.<br> A <a href="https://github.com/SteamClientHomebrew/PluginDatabase/pull/167">request</a> has been submitted for inclusion in the Millennium Plugin Repository and is awaiting review.
+<ins>NOTE</ins> : The plugin is now officially available through the Millennium Plugin Repository.<br> Manual installation remains available as an alternative.
 
 </p>
   <img width="700" height="1" src="https://via.placeholder.com/700x1/262626/262626">
