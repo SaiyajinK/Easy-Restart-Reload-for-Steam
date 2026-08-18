@@ -4,6 +4,9 @@
 <p align="center">for Steam.</p>
 
 <p align="center">
+<a href="https://steambrew.app/plugin/af2b8c89d682">
+  <img src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fsteambrew.app%2Fapi%2Fv1%2Fplugin%2Faf2b8c89d682&query=$.downloadCount&suffix=%20%E2%86%93&label=&logo=steam&style=flat&color=1a9fff&labelColor=262626&logoColor=FFFFFF"></a>
+&nbsp;
 <a href="https://discord.gg/2qnAq8B69u">
   <img src="https://img.shields.io/badge/Discord-5865F2?style=flat&logo=discord&labelColor=262626&color=5865F2&logoColor=FFFFFF"></a>
 &nbsp;
