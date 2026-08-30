@@ -30,13 +30,16 @@
 
 ### ✨ Features :
 
-| Feature | Description |
-|----------|-------------|
-| 🔄 Quick Restart | Fully restarts Steam in one click |
-| 🔃 Fast Reload | Reloads Steam faster than a full reboot |
-| 🪶 Lightweight | No unnecessary background processes |
-| 🖥️ User Friendly | Simple and straightforward usage |
-| 🚀 Easy Setup | Ready in seconds |
+| Feature                  | Description                                      |
+| ------------------------ | ------------------------------------------------ |
+| 🔄 Quick Restart         | Fully restarts Steam in one click                |
+| 🔃 Fast Reload           | Reloads the Steam interface without a full reboot |
+| 🛠️ Developer Mode       | Restarts Steam directly with the `-dev` argument |
+| ⚙️ Configurable Actions  | Enable or disable each menu action individually  |
+| 🌐 30 Languages          | Fully translated |
+| 🪶 Lightweight           | No unnecessary background processes             |
+| 🖥️ User Friendly        | Simple, clean, and straightforward usage         |
+| 🚀 Easy Setup            | Ready to use in seconds                          |
 
 </p>
   <img width="700" height="1" src="https://via.placeholder.com/700x1/262626/262626">
@@ -47,7 +50,7 @@
 | 🇫🇷 | 🇬🇧 | 🇩🇪 | 🇪🇸 | 🇮🇹 | 🇵🇹 | 🇧🇷 | 🇷🇺 | 🇯🇵 | 🇰🇷 |
 |------|------|------|------|------|------|------|------|------|------|
 | 🇨🇳 | 🇹🇼 | 🇵🇱 | 🇹🇷 | 🇳🇱 | 🇧🇬 | 🇨🇿 | 🇩🇰 | 🇬🇷 | 🇫🇮 |
-| 🇭🇺 | 🇮🇩 | 🇳🇴 | 🇷🇴 | 🇸🇪 | 🇹🇭 | 🇺🇦 | 🇻🇳 | 🌎 | ✅ |
+| 🇭🇺 | 🇮🇩 | 🇳🇴 | 🇷🇴 | 🇸🇪 | 🇹🇭 | 🇺🇦 | 🇻🇳 | 🌎 | 🇲🇾 |
 
 The plugin will be automatically translated into your Steam client's language.
 
@@ -57,7 +60,7 @@ The plugin will be automatically translated into your Steam client's language.
 
 ### 📸 Preview :
 
-| <img width="341" height="361" alt="steamwebhelper_OO0y5ZWnGS" src="https://github.com/user-attachments/assets/f2add067-a8cd-4cc2-9ad1-2ec83f49ccfa" /> |
+| <img width="347" height="387" alt="explorer_jVkRxbARYH" src="https://github.com/user-attachments/assets/280ff5f5-c943-4fcf-9d8f-4199628d0348" /> |
 | ------ |
 
 <p align="center">
