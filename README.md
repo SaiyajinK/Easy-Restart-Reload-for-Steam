@@ -106,9 +106,9 @@ The plugin will be automatically translated into your Steam client's language.
 
 | Component | Version |
 |-----------|----------|
-| Steam Client | 1779918128 |
+| Steam Stable Client | 1785799196 |
+| Steam Beta Client | 1787790984 |
 | Steam API | SteamClient023 |
-| Steam Channels | Stable & beta |
 | Millennium | Stable & beta |
 
 </p>
