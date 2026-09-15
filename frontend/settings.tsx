@@ -1,4 +1,4 @@
-import { Field, Toggle } from "@steambrew/client";
+import { ControlsList, Field, Toggle } from "@steambrew/client";
 import { useEffect, useState } from "react";
 import { getLanguageKey, TEXT } from "./i18n";
 
@@ -110,25 +110,28 @@ export function SettingsPanel() {
         />
       </Field>
 
-      <Field
-        label={labels.developerRestart}
-        description={labels.developerRestartDescription}
-      >
-        <Toggle
-          value={settings.showDeveloperRestart}
-          onChange={(checked) => update("showDeveloperRestart", checked)}
-        />
-      </Field>
+      <ControlsList>
+        <Field
+          label={labels.developerRestart}
+          description={labels.developerRestartDescription}
+          bottomSeparator="standard"
+        >
+          <Toggle
+            value={settings.showDeveloperRestart}
+            onChange={(checked) => update("showDeveloperRestart", checked)}
+          />
+        </Field>
 
-      <Field
-        label={labels.alwaysDeveloperRestart}
-        description={labels.alwaysDeveloperRestartDescription}
-      >
-        <Toggle
-          value={settings.alwaysDeveloperRestart}
-          onChange={(checked) => update("alwaysDeveloperRestart", checked)}
-        />
-      </Field>
+        <Field
+          label={labels.alwaysDeveloperRestart}
+          description={labels.alwaysDeveloperRestartDescription}
+        >
+          <Toggle
+            value={settings.alwaysDeveloperRestart}
+            onChange={(checked) => update("alwaysDeveloperRestart", checked)}
+          />
+        </Field>
+      </ControlsList>
     </div>
   );
 }
