@@ -12,6 +12,9 @@ export type TextKey =
   | "reloadRequiredTitle"
   | "reloadRequiredDescription"
   | "reloadNow"
+  | "restartRequiredTitle"
+  | "restartRequiredDescription"
+  | "restartNow"
   | "cancel";
 
 export type TranslationSet =
@@ -22,9 +25,11 @@ export const TEXT:
   schinese: {
     restart: "重启 Steam",
     reload: "重新加载界面",
-    developerRestart: "以开发者模式重启 Steam",
+    developerRestart:
+      "以开发者模式重启 Steam（本地会话）",
     exitDeveloperMode: "退出开发者模式",
-    restartDescription: "完全重启 Steam 客户端。",
+    restartDescription:
+      "完全重启 Steam 客户端。",
     reloadDescription:
       "仅重新加载 Steam 界面，不重启客户端。",
     developerRestartDescription:
@@ -39,6 +44,10 @@ export const TEXT:
     reloadRequiredDescription:
       "要启用或禁用所选选项，需要重新加载。确定要继续吗？",
     reloadNow: "立即重新加载",
+    restartRequiredTitle: "需要重启",
+    restartRequiredDescription:
+      "要启用或禁用所选选项，需要重启 Steam。确定要继续吗？",
+    restartNow: "立即重启",
     cancel: "取消",
   },
 
@@ -46,7 +55,7 @@ export const TEXT:
     restart: "重新啟動 Steam",
     reload: "重新載入介面",
     developerRestart:
-      "以開發者模式重新啟動 Steam",
+      "以開發者模式重新啟動 Steam（本機工作階段）",
     exitDeveloperMode: "退出開發者模式",
     restartDescription:
       "完整重新啟動 Steam 用戶端。",
@@ -64,6 +73,10 @@ export const TEXT:
     reloadRequiredDescription:
       "若要啟用或停用所選選項，需要重新載入。確定要繼續嗎？",
     reloadNow: "立即重新載入",
+    restartRequiredTitle: "需要重新啟動",
+    restartRequiredDescription:
+      "若要啟用或停用所選選項，需要重新啟動 Steam。確定要繼續嗎？",
+    restartNow: "立即重新啟動",
     cancel: "取消",
   },
 
@@ -71,7 +84,7 @@ export const TEXT:
     restart: "Steam を再起動",
     reload: "UI を再読み込み",
     developerRestart:
-      "Steam を開発者モードで再起動",
+      "Steam を開発者モードで再起動（ローカルセッション）",
     exitDeveloperMode:
       "開発者モードを終了",
     restartDescription:
@@ -91,6 +104,11 @@ export const TEXT:
     reloadRequiredDescription:
       "選択したオプションを有効または無効にするには、再読み込みが必要です。続行してもよろしいですか？",
     reloadNow: "今すぐ再読み込み",
+    restartRequiredTitle:
+      "再起動が必要です",
+    restartRequiredDescription:
+      "選択したオプションを有効または無効にするには、Steam の再起動が必要です。続行してもよろしいですか？",
+    restartNow: "今すぐ再起動",
     cancel: "キャンセル",
   },
 
@@ -98,7 +116,7 @@ export const TEXT:
     restart: "Steam 재시작",
     reload: "UI 새로고침",
     developerRestart:
-      "개발자 모드로 Steam 재시작",
+      "개발자 모드로 Steam 재시작 (로컬 세션)",
     exitDeveloperMode:
       "개발자 모드 종료",
     restartDescription:
@@ -118,6 +136,11 @@ export const TEXT:
     reloadRequiredDescription:
       "선택한 옵션을 활성화하거나 비활성화하려면 새로고침이 필요합니다. 계속하시겠습니까?",
     reloadNow: "지금 새로고침",
+    restartRequiredTitle:
+      "재시작 필요",
+    restartRequiredDescription:
+      "선택한 옵션을 활성화하거나 비활성화하려면 Steam을 다시 시작해야 합니다. 계속하시겠습니까?",
+    restartNow: "지금 재시작",
     cancel: "취소",
   },
 
@@ -125,7 +148,7 @@ export const TEXT:
     restart: "รีสตาร์ท Steam",
     reload: "โหลดอินเทอร์เฟซใหม่",
     developerRestart:
-      "รีสตาร์ท Steam ในโหมดนักพัฒนา",
+      "รีสตาร์ท Steam ในโหมดนักพัฒนา (เซสชันภายในเครื่อง)",
     exitDeveloperMode:
       "ออกจากโหมดนักพัฒนา",
     restartDescription:
@@ -145,6 +168,11 @@ export const TEXT:
     reloadRequiredDescription:
       "จำเป็นต้องโหลดใหม่เพื่อเปิดหรือปิดตัวเลือกที่เลือก คุณแน่ใจหรือไม่ว่าต้องการดำเนินการต่อ",
     reloadNow: "โหลดใหม่ตอนนี้",
+    restartRequiredTitle:
+      "จำเป็นต้องรีสตาร์ท",
+    restartRequiredDescription:
+      "จำเป็นต้องรีสตาร์ท Steam เพื่อเปิดหรือปิดตัวเลือกที่เลือก คุณแน่ใจหรือไม่ว่าต้องการดำเนินการต่อ",
+    restartNow: "รีสตาร์ทตอนนี้",
     cancel: "ยกเลิก",
   },
 
@@ -152,7 +180,7 @@ export const TEXT:
     restart: "Рестартирай Steam",
     reload: "Презареди интерфейса",
     developerRestart:
-      "Рестартирай Steam в режим за разработчици",
+      "Рестартирай Steam в режим за разработчици (локална сесия)",
     exitDeveloperMode:
       "Изход от режима за разработчици",
     restartDescription:
@@ -172,6 +200,11 @@ export const TEXT:
     reloadRequiredDescription:
       "За да активирате или деактивирате избраните опции, е необходимо презареждане. Сигурни ли сте, че искате да продължите?",
     reloadNow: "Презареди сега",
+    restartRequiredTitle:
+      "Необходимо е рестартиране",
+    restartRequiredDescription:
+      "За да активирате или деактивирате избраните опции, е необходимо рестартиране на Steam. Сигурни ли сте, че искате да продължите?",
+    restartNow: "Рестартирай сега",
     cancel: "Отказ",
   },
 
@@ -179,7 +212,7 @@ export const TEXT:
     restart: "Restartovat Steam",
     reload: "Znovu načíst rozhraní",
     developerRestart:
-      "Restartovat Steam ve vývojářském režimu",
+      "Restartovat Steam ve vývojářském režimu (místní relace)",
     exitDeveloperMode:
       "Ukončit vývojářský režim",
     restartDescription:
@@ -199,6 +232,11 @@ export const TEXT:
     reloadRequiredDescription:
       "Pro aktivaci nebo deaktivaci vybraných možností je nutné nové načtení. Opravdu chcete pokračovat?",
     reloadNow: "Načíst znovu",
+    restartRequiredTitle:
+      "Je vyžadován restart",
+    restartRequiredDescription:
+      "Pro aktivaci nebo deaktivaci vybraných možností je nutné restartovat Steam. Opravdu chcete pokračovat?",
+    restartNow: "Restartovat nyní",
     cancel: "Zrušit",
   },
 
@@ -206,7 +244,7 @@ export const TEXT:
     restart: "Genstart Steam",
     reload: "Genindlæs brugerfladen",
     developerRestart:
-      "Genstart Steam i udviklertilstand",
+      "Genstart Steam i udviklertilstand (lokal session)",
     exitDeveloperMode:
       "Afslut udviklertilstand",
     restartDescription:
@@ -226,6 +264,11 @@ export const TEXT:
     reloadRequiredDescription:
       "For at aktivere eller deaktivere de valgte indstillinger kræves en genindlæsning. Er du sikker på, at du vil fortsætte?",
     reloadNow: "Genindlæs nu",
+    restartRequiredTitle:
+      "Genstart påkrævet",
+    restartRequiredDescription:
+      "For at aktivere eller deaktivere de valgte indstillinger skal Steam genstartes. Er du sikker på, at du vil fortsætte?",
+    restartNow: "Genstart nu",
     cancel: "Annuller",
   },
 
@@ -233,7 +276,7 @@ export const TEXT:
     restart: "Steam neu starten",
     reload: "Oberfläche neu laden",
     developerRestart:
-      "Steam im Entwicklermodus neu starten",
+      "Steam im Entwicklermodus neu starten (lokale Sitzung)",
     exitDeveloperMode:
       "Entwicklermodus verlassen",
     restartDescription:
@@ -253,6 +296,11 @@ export const TEXT:
     reloadRequiredDescription:
       "Zum Aktivieren oder Deaktivieren der ausgewählten Optionen ist ein Neuladen erforderlich. Möchten Sie wirklich fortfahren?",
     reloadNow: "Jetzt neu laden",
+    restartRequiredTitle:
+      "Neustart erforderlich",
+    restartRequiredDescription:
+      "Zum Aktivieren oder Deaktivieren der ausgewählten Optionen muss Steam neu gestartet werden. Möchten Sie wirklich fortfahren?",
+    restartNow: "Jetzt neu starten",
     cancel: "Abbrechen",
   },
 
@@ -260,7 +308,7 @@ export const TEXT:
     restart: "Restart Steam",
     reload: "Reload UI",
     developerRestart:
-      "Restart Steam in Developer Mode",
+      "Restart Steam in Developer Mode (local session)",
     exitDeveloperMode:
       "Exit Developer Mode",
     restartDescription:
@@ -280,6 +328,11 @@ export const TEXT:
     reloadRequiredDescription:
       "To enable or disable the selected options, a reload is required. Are you sure you want to continue?",
     reloadNow: "Reload now",
+    restartRequiredTitle:
+      "Restart required",
+    restartRequiredDescription:
+      "To enable or disable the selected options, a Steam restart is required. Are you sure you want to continue?",
+    restartNow: "Restart now",
     cancel: "Cancel",
   },
 
@@ -287,7 +340,7 @@ export const TEXT:
     restart: "Reiniciar Steam",
     reload: "Recargar interfaz",
     developerRestart:
-      "Reiniciar Steam en modo desarrollador",
+      "Reiniciar Steam en modo desarrollador (sesión local)",
     exitDeveloperMode:
       "Salir del modo desarrollador",
     restartDescription:
@@ -307,6 +360,11 @@ export const TEXT:
     reloadRequiredDescription:
       "Para activar o desactivar las opciones seleccionadas, es necesario recargar. ¿Seguro que quieres continuar?",
     reloadNow: "Recargar ahora",
+    restartRequiredTitle:
+      "Es necesario reiniciar",
+    restartRequiredDescription:
+      "Para activar o desactivar las opciones seleccionadas, es necesario reiniciar Steam. ¿Seguro que quieres continuar?",
+    restartNow: "Reiniciar ahora",
     cancel: "Cancelar",
   },
 
@@ -314,7 +372,7 @@ export const TEXT:
     restart: "Reiniciar Steam",
     reload: "Recargar interfaz",
     developerRestart:
-      "Reiniciar Steam en modo desarrollador",
+      "Reiniciar Steam en modo desarrollador (sesión local)",
     exitDeveloperMode:
       "Salir del modo desarrollador",
     restartDescription:
@@ -334,6 +392,11 @@ export const TEXT:
     reloadRequiredDescription:
       "Para activar o desactivar las opciones seleccionadas, es necesario recargar. ¿Estás seguro de que quieres continuar?",
     reloadNow: "Recargar ahora",
+    restartRequiredTitle:
+      "Se requiere reiniciar",
+    restartRequiredDescription:
+      "Para activar o desactivar las opciones seleccionadas, es necesario reiniciar Steam. ¿Estás seguro de que quieres continuar?",
+    restartNow: "Reiniciar ahora",
     cancel: "Cancelar",
   },
 
@@ -341,7 +404,7 @@ export const TEXT:
     restart: "Επανεκκίνηση Steam",
     reload: "Επαναφόρτωση διεπαφής",
     developerRestart:
-      "Επανεκκίνηση Steam σε λειτουργία προγραμματιστή",
+      "Επανεκκίνηση Steam σε λειτουργία προγραμματιστή (τοπική συνεδρία)",
     exitDeveloperMode:
       "Έξοδος από τη λειτουργία προγραμματιστή",
     restartDescription:
@@ -361,6 +424,11 @@ export const TEXT:
     reloadRequiredDescription:
       "Για να ενεργοποιήσετε ή να απενεργοποιήσετε τις επιλεγμένες επιλογές, απαιτείται επαναφόρτωση. Είστε βέβαιοι ότι θέλετε να συνεχίσετε;",
     reloadNow: "Επαναφόρτωση τώρα",
+    restartRequiredTitle:
+      "Απαιτείται επανεκκίνηση",
+    restartRequiredDescription:
+      "Για να ενεργοποιήσετε ή να απενεργοποιήσετε τις επιλεγμένες επιλογές, απαιτείται επανεκκίνηση του Steam. Είστε βέβαιοι ότι θέλετε να συνεχίσετε;",
+    restartNow: "Επανεκκίνηση τώρα",
     cancel: "Ακύρωση",
   },
 
@@ -368,7 +436,7 @@ export const TEXT:
     restart: "Redémarrer Steam",
     reload: "Recharger l’interface",
     developerRestart:
-      "Redémarrer Steam en mode développeur",
+      "Redémarrer Steam en mode développeur (session locale)",
     exitDeveloperMode:
       "Quitter le mode développeur",
     restartDescription:
@@ -388,6 +456,11 @@ export const TEXT:
     reloadRequiredDescription:
       "Pour activer ou désactiver les options sélectionnées, un rechargement est nécessaire. Êtes-vous sûr de vouloir continuer ?",
     reloadNow: "Recharger maintenant",
+    restartRequiredTitle:
+      "Redémarrage requis",
+    restartRequiredDescription:
+      "Pour activer ou désactiver les options sélectionnées, un redémarrage de Steam est nécessaire. Êtes-vous sûr de vouloir continuer ?",
+    restartNow: "Redémarrer maintenant",
     cancel: "Annuler",
   },
 
@@ -395,7 +468,7 @@ export const TEXT:
     restart: "Mulai ulang Steam",
     reload: "Muat ulang antarmuka",
     developerRestart:
-      "Mulai ulang Steam dalam mode pengembang",
+      "Mulai ulang Steam dalam mode pengembang (sesi lokal)",
     exitDeveloperMode:
       "Keluar dari mode pengembang",
     restartDescription:
@@ -415,6 +488,11 @@ export const TEXT:
     reloadRequiredDescription:
       "Untuk mengaktifkan atau menonaktifkan opsi yang dipilih, diperlukan pemuatan ulang. Yakin ingin melanjutkan?",
     reloadNow: "Muat ulang sekarang",
+    restartRequiredTitle:
+      "Perlu memulai ulang",
+    restartRequiredDescription:
+      "Untuk mengaktifkan atau menonaktifkan opsi yang dipilih, Steam perlu dimulai ulang. Yakin ingin melanjutkan?",
+    restartNow: "Mulai ulang sekarang",
     cancel: "Batal",
   },
 
@@ -422,7 +500,7 @@ export const TEXT:
     restart: "Mulakan semula Steam",
     reload: "Muat semula antara muka",
     developerRestart:
-      "Mulakan semula Steam dalam Mod Pembangun",
+      "Mulakan semula Steam dalam Mod Pembangun (sesi setempat)",
     exitDeveloperMode:
       "Keluar daripada Mod Pembangun",
     restartDescription:
@@ -442,6 +520,11 @@ export const TEXT:
     reloadRequiredDescription:
       "Untuk mengaktifkan atau menyahaktifkan pilihan yang dipilih, muat semula diperlukan. Adakah anda pasti mahu meneruskan?",
     reloadNow: "Muat semula sekarang",
+    restartRequiredTitle:
+      "Mulakan semula diperlukan",
+    restartRequiredDescription:
+      "Untuk mengaktifkan atau menyahaktifkan pilihan yang dipilih, Steam perlu dimulakan semula. Adakah anda pasti mahu meneruskan?",
+    restartNow: "Mulakan semula sekarang",
     cancel: "Batal",
   },
 
@@ -449,7 +532,7 @@ export const TEXT:
     restart: "Riavvia Steam",
     reload: "Ricarica interfaccia",
     developerRestart:
-      "Riavvia Steam in modalità sviluppatore",
+      "Riavvia Steam in modalità sviluppatore (sessione locale)",
     exitDeveloperMode:
       "Esci dalla modalità sviluppatore",
     restartDescription:
@@ -469,6 +552,11 @@ export const TEXT:
     reloadRequiredDescription:
       "Per attivare o disattivare le opzioni selezionate è necessario ricaricare. Vuoi continuare?",
     reloadNow: "Ricarica ora",
+    restartRequiredTitle:
+      "Riavvio richiesto",
+    restartRequiredDescription:
+      "Per attivare o disattivare le opzioni selezionate è necessario riavviare Steam. Vuoi continuare?",
+    restartNow: "Riavvia ora",
     cancel: "Annulla",
   },
 
@@ -476,7 +564,7 @@ export const TEXT:
     restart: "Steam újraindítása",
     reload: "Felület újratöltése",
     developerRestart:
-      "Steam újraindítása fejlesztői módban",
+      "Steam újraindítása fejlesztői módban (helyi munkamenet)",
     exitDeveloperMode:
       "Kilépés a fejlesztői módból",
     restartDescription:
@@ -496,6 +584,11 @@ export const TEXT:
     reloadRequiredDescription:
       "A kijelölt beállítások engedélyezéséhez vagy letiltásához újratöltés szükséges. Biztosan folytatja?",
     reloadNow: "Újratöltés most",
+    restartRequiredTitle:
+      "Újraindítás szükséges",
+    restartRequiredDescription:
+      "A kijelölt beállítások engedélyezéséhez vagy letiltásához a Steam újraindítása szükséges. Biztosan folytatja?",
+    restartNow: "Újraindítás most",
     cancel: "Mégse",
   },
 
@@ -503,7 +596,7 @@ export const TEXT:
     restart: "Steam opnieuw starten",
     reload: "Interface herladen",
     developerRestart:
-      "Steam opnieuw starten in ontwikkelaarsmodus",
+      "Steam opnieuw starten in ontwikkelaarsmodus (lokale sessie)",
     exitDeveloperMode:
       "Ontwikkelaarsmodus afsluiten",
     restartDescription:
@@ -523,6 +616,11 @@ export const TEXT:
     reloadRequiredDescription:
       "Om de geselecteerde opties in of uit te schakelen, moet de interface worden herladen. Weet je zeker dat je wilt doorgaan?",
     reloadNow: "Nu herladen",
+    restartRequiredTitle:
+      "Opnieuw starten vereist",
+    restartRequiredDescription:
+      "Om de geselecteerde opties in of uit te schakelen, moet Steam opnieuw worden gestart. Weet je zeker dat je wilt doorgaan?",
+    restartNow: "Nu opnieuw starten",
     cancel: "Annuleren",
   },
 
@@ -530,7 +628,7 @@ export const TEXT:
     restart: "Start Steam på nytt",
     reload: "Last inn grensesnittet på nytt",
     developerRestart:
-      "Start Steam på nytt i utviklermodus",
+      "Start Steam på nytt i utviklermodus (lokal økt)",
     exitDeveloperMode:
       "Avslutt utviklermodus",
     restartDescription:
@@ -550,6 +648,11 @@ export const TEXT:
     reloadRequiredDescription:
       "For å aktivere eller deaktivere de valgte alternativene kreves en ny innlasting. Er du sikker på at du vil fortsette?",
     reloadNow: "Last inn på nytt nå",
+    restartRequiredTitle:
+      "Omstart kreves",
+    restartRequiredDescription:
+      "For å aktivere eller deaktivere de valgte alternativene må Steam startes på nytt. Er du sikker på at du vil fortsette?",
+    restartNow: "Start på nytt nå",
     cancel: "Avbryt",
   },
 
@@ -557,7 +660,7 @@ export const TEXT:
     restart: "Uruchom ponownie Steam",
     reload: "Przeładuj interfejs",
     developerRestart:
-      "Uruchom ponownie Steam w trybie deweloperskim",
+      "Uruchom ponownie Steam w trybie deweloperskim (sesja lokalna)",
     exitDeveloperMode:
       "Wyjdź z trybu deweloperskiego",
     restartDescription:
@@ -577,6 +680,12 @@ export const TEXT:
     reloadRequiredDescription:
       "Aby włączyć lub wyłączyć wybrane opcje, wymagane jest przeładowanie. Czy na pewno chcesz kontynuować?",
     reloadNow: "Przeładuj teraz",
+    restartRequiredTitle:
+      "Wymagane ponowne uruchomienie",
+    restartRequiredDescription:
+      "Aby włączyć lub wyłączyć wybrane opcje, należy ponownie uruchomić Steam. Czy na pewno chcesz kontynuować?",
+    restartNow:
+      "Uruchom ponownie teraz",
     cancel: "Anuluj",
   },
 
@@ -584,7 +693,7 @@ export const TEXT:
     restart: "Reiniciar Steam",
     reload: "Recarregar interface",
     developerRestart:
-      "Reiniciar Steam no modo de programador",
+      "Reiniciar Steam no modo de programador (sessão local)",
     exitDeveloperMode:
       "Sair do modo de programador",
     restartDescription:
@@ -604,6 +713,11 @@ export const TEXT:
     reloadRequiredDescription:
       "Para ativar ou desativar as opções selecionadas, é necessário recarregar. Tem a certeza de que pretende continuar?",
     reloadNow: "Recarregar agora",
+    restartRequiredTitle:
+      "É necessário reiniciar",
+    restartRequiredDescription:
+      "Para ativar ou desativar as opções selecionadas, é necessário reiniciar o Steam. Tem a certeza de que pretende continuar?",
+    restartNow: "Reiniciar agora",
     cancel: "Cancelar",
   },
 
@@ -611,7 +725,7 @@ export const TEXT:
     restart: "Reiniciar Steam",
     reload: "Recarregar interface",
     developerRestart:
-      "Reiniciar Steam no modo de desenvolvedor",
+      "Reiniciar Steam no modo de desenvolvedor (sessão local)",
     exitDeveloperMode:
       "Sair do modo de desenvolvedor",
     restartDescription:
@@ -631,6 +745,11 @@ export const TEXT:
     reloadRequiredDescription:
       "Para ativar ou desativar as opções selecionadas, é necessário recarregar. Tem certeza de que deseja continuar?",
     reloadNow: "Recarregar agora",
+    restartRequiredTitle:
+      "É necessário reiniciar",
+    restartRequiredDescription:
+      "Para ativar ou desativar as opções selecionadas, é necessário reiniciar o Steam. Tem certeza de que deseja continuar?",
+    restartNow: "Reiniciar agora",
     cancel: "Cancelar",
   },
 
@@ -638,7 +757,7 @@ export const TEXT:
     restart: "Repornește Steam",
     reload: "Reîncarcă interfața",
     developerRestart:
-      "Repornește Steam în modul dezvoltator",
+      "Repornește Steam în modul dezvoltator (sesiune locală)",
     exitDeveloperMode:
       "Ieși din modul dezvoltator",
     restartDescription:
@@ -658,6 +777,11 @@ export const TEXT:
     reloadRequiredDescription:
       "Pentru a activa sau dezactiva opțiunile selectate, este necesară o reîncărcare. Sigur doriți să continuați?",
     reloadNow: "Reîncarcă acum",
+    restartRequiredTitle:
+      "Este necesară repornirea",
+    restartRequiredDescription:
+      "Pentru a activa sau dezactiva opțiunile selectate, este necesară repornirea Steam. Sigur doriți să continuați?",
+    restartNow: "Repornește acum",
     cancel: "Anulează",
   },
 
@@ -665,7 +789,7 @@ export const TEXT:
     restart: "Перезапустить Steam",
     reload: "Перезагрузить интерфейс",
     developerRestart:
-      "Перезапустить Steam в режиме разработчика",
+      "Перезапустить Steam в режиме разработчика (локальный сеанс)",
     exitDeveloperMode:
       "Выйти из режима разработчика",
     restartDescription:
@@ -685,6 +809,11 @@ export const TEXT:
     reloadRequiredDescription:
       "Для включения или отключения выбранных параметров требуется перезагрузка интерфейса. Продолжить?",
     reloadNow: "Перезагрузить сейчас",
+    restartRequiredTitle:
+      "Требуется перезапуск",
+    restartRequiredDescription:
+      "Для включения или отключения выбранных параметров требуется перезапуск Steam. Продолжить?",
+    restartNow: "Перезапустить сейчас",
     cancel: "Отмена",
   },
 
@@ -692,7 +821,7 @@ export const TEXT:
     restart: "Käynnistä Steam uudelleen",
     reload: "Lataa käyttöliittymä uudelleen",
     developerRestart:
-      "Käynnistä Steam uudelleen kehittäjätilassa",
+      "Käynnistä Steam uudelleen kehittäjätilassa (paikallinen istunto)",
     exitDeveloperMode:
       "Poistu kehittäjätilasta",
     restartDescription:
@@ -712,6 +841,12 @@ export const TEXT:
     reloadRequiredDescription:
       "Valittujen asetusten ottaminen käyttöön tai poistaminen käytöstä vaatii uudelleenlatauksen. Haluatko varmasti jatkaa?",
     reloadNow: "Lataa nyt uudelleen",
+    restartRequiredTitle:
+      "Uudelleenkäynnistys vaaditaan",
+    restartRequiredDescription:
+      "Valittujen asetusten ottaminen käyttöön tai poistaminen käytöstä vaatii Steamin uudelleenkäynnistyksen. Haluatko varmasti jatkaa?",
+    restartNow:
+      "Käynnistä uudelleen nyt",
     cancel: "Peruuta",
   },
 
@@ -719,7 +854,7 @@ export const TEXT:
     restart: "Starta om Steam",
     reload: "Ladda om gränssnittet",
     developerRestart:
-      "Starta om Steam i utvecklarläge",
+      "Starta om Steam i utvecklarläge (lokal session)",
     exitDeveloperMode:
       "Avsluta utvecklarläge",
     restartDescription:
@@ -739,6 +874,11 @@ export const TEXT:
     reloadRequiredDescription:
       "För att aktivera eller inaktivera de valda alternativen krävs en omladdning. Är du säker på att du vill fortsätta?",
     reloadNow: "Ladda om nu",
+    restartRequiredTitle:
+      "Omstart krävs",
+    restartRequiredDescription:
+      "För att aktivera eller inaktivera de valda alternativen måste Steam startas om. Är du säker på att du vill fortsätta?",
+    restartNow: "Starta om nu",
     cancel: "Avbryt",
   },
 
@@ -746,7 +886,7 @@ export const TEXT:
     restart: "Steam’i yeniden başlat",
     reload: "Arayüzü yenile",
     developerRestart:
-      "Steam’i geliştirici modunda yeniden başlat",
+      "Steam’i geliştirici modunda yeniden başlat (yerel oturum)",
     exitDeveloperMode:
       "Geliştirici modundan çık",
     restartDescription:
@@ -766,6 +906,11 @@ export const TEXT:
     reloadRequiredDescription:
       "Seçili seçenekleri etkinleştirmek veya devre dışı bırakmak için yeniden yükleme gereklidir. Devam etmek istediğinizden emin misiniz?",
     reloadNow: "Şimdi yeniden yükle",
+    restartRequiredTitle:
+      "Yeniden başlatma gerekli",
+    restartRequiredDescription:
+      "Seçili seçenekleri etkinleştirmek veya devre dışı bırakmak için Steam’in yeniden başlatılması gerekir. Devam etmek istediğinizden emin misiniz?",
+    restartNow: "Şimdi yeniden başlat",
     cancel: "İptal",
   },
 
@@ -773,7 +918,7 @@ export const TEXT:
     restart: "Khởi động lại Steam",
     reload: "Tải lại giao diện",
     developerRestart:
-      "Khởi động lại Steam ở chế độ nhà phát triển",
+      "Khởi động lại Steam ở chế độ nhà phát triển (phiên cục bộ)",
     exitDeveloperMode:
       "Thoát chế độ nhà phát triển",
     restartDescription:
@@ -793,6 +938,11 @@ export const TEXT:
     reloadRequiredDescription:
       "Để bật hoặc tắt các tùy chọn đã chọn, bạn cần tải lại. Bạn có chắc chắn muốn tiếp tục không?",
     reloadNow: "Tải lại ngay",
+    restartRequiredTitle:
+      "Cần khởi động lại",
+    restartRequiredDescription:
+      "Để bật hoặc tắt các tùy chọn đã chọn, bạn cần khởi động lại Steam. Bạn có chắc chắn muốn tiếp tục không?",
+    restartNow: "Khởi động lại ngay",
     cancel: "Hủy",
   },
 
@@ -800,7 +950,7 @@ export const TEXT:
     restart: "Перезапустити Steam",
     reload: "Перезавантажити інтерфейс",
     developerRestart:
-      "Перезапустити Steam у режимі розробника",
+      "Перезапустити Steam у режимі розробника (локальний сеанс)",
     exitDeveloperMode:
       "Вийти з режиму розробника",
     restartDescription:
@@ -821,6 +971,12 @@ export const TEXT:
       "Для ввімкнення або вимкнення вибраних параметрів потрібне перезавантаження інтерфейсу. Продовжити?",
     reloadNow:
       "Перезавантажити зараз",
+    restartRequiredTitle:
+      "Потрібен перезапуск",
+    restartRequiredDescription:
+      "Для ввімкнення або вимкнення вибраних параметрів потрібен перезапуск Steam. Продовжити?",
+    restartNow:
+      "Перезапустити зараз",
     cancel: "Скасувати",
   },
 };
@@ -841,7 +997,8 @@ function normalizeLanguage(
   language: string,
 ): string {
   const normalized =
-    String(language || "english").toLowerCase();
+    String(language || "english")
+      .toLowerCase();
 
   if (TEXT[normalized]) {
     return normalized;
@@ -890,7 +1047,10 @@ function normalizeLanguage(
     uk: "ukrainian",
   };
 
-  return aliases[shortLanguage] || "english";
+  return (
+    aliases[shortLanguage] ||
+    "english"
+  );
 }
 
 export async function getLanguageKey(
