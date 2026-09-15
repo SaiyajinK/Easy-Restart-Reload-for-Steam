@@ -2,6 +2,7 @@ export type TextKey =
   | "restart"
   | "reload"
   | "developerRestart"
+  | "developerRestartLocalSession"
   | "exitDeveloperMode"
   | "restartDescription"
   | "reloadDescription"
@@ -26,6 +27,8 @@ export const TEXT:
     restart: "重启 Steam",
     reload: "重新加载界面",
     developerRestart:
+      "以开发者模式重启 Steam",
+    developerRestartLocalSession:
       "以开发者模式重启 Steam（本地会话）",
     exitDeveloperMode: "退出开发者模式",
     restartDescription:
@@ -55,6 +58,8 @@ export const TEXT:
     restart: "重新啟動 Steam",
     reload: "重新載入介面",
     developerRestart:
+      "以開發者模式重新啟動 Steam",
+    developerRestartLocalSession:
       "以開發者模式重新啟動 Steam（本機工作階段）",
     exitDeveloperMode: "退出開發者模式",
     restartDescription:
@@ -84,6 +89,8 @@ export const TEXT:
     restart: "Steam を再起動",
     reload: "UI を再読み込み",
     developerRestart:
+      "Steam を開発者モードで再起動",
+    developerRestartLocalSession:
       "Steam を開発者モードで再起動（ローカルセッション）",
     exitDeveloperMode:
       "開発者モードを終了",
@@ -116,6 +123,8 @@ export const TEXT:
     restart: "Steam 재시작",
     reload: "UI 새로고침",
     developerRestart:
+      "개발자 모드로 Steam 재시작",
+    developerRestartLocalSession:
       "개발자 모드로 Steam 재시작 (로컬 세션)",
     exitDeveloperMode:
       "개발자 모드 종료",
@@ -148,6 +157,8 @@ export const TEXT:
     restart: "รีสตาร์ท Steam",
     reload: "โหลดอินเทอร์เฟซใหม่",
     developerRestart:
+      "รีสตาร์ท Steam ในโหมดนักพัฒนา",
+    developerRestartLocalSession:
       "รีสตาร์ท Steam ในโหมดนักพัฒนา (เซสชันภายในเครื่อง)",
     exitDeveloperMode:
       "ออกจากโหมดนักพัฒนา",
@@ -180,6 +191,8 @@ export const TEXT:
     restart: "Рестартирай Steam",
     reload: "Презареди интерфейса",
     developerRestart:
+      "Рестартирай Steam в режим за разработчици",
+    developerRestartLocalSession:
       "Рестартирай Steam в режим за разработчици (локална сесия)",
     exitDeveloperMode:
       "Изход от режима за разработчици",
@@ -212,6 +225,8 @@ export const TEXT:
     restart: "Restartovat Steam",
     reload: "Znovu načíst rozhraní",
     developerRestart:
+      "Restartovat Steam ve vývojářském režimu",
+    developerRestartLocalSession:
       "Restartovat Steam ve vývojářském režimu (místní relace)",
     exitDeveloperMode:
       "Ukončit vývojářský režim",
@@ -244,6 +259,8 @@ export const TEXT:
     restart: "Genstart Steam",
     reload: "Genindlæs brugerfladen",
     developerRestart:
+      "Genstart Steam i udviklertilstand",
+    developerRestartLocalSession:
       "Genstart Steam i udviklertilstand (lokal session)",
     exitDeveloperMode:
       "Afslut udviklertilstand",
@@ -276,6 +293,8 @@ export const TEXT:
     restart: "Steam neu starten",
     reload: "Oberfläche neu laden",
     developerRestart:
+      "Steam im Entwicklermodus neu starten",
+    developerRestartLocalSession:
       "Steam im Entwicklermodus neu starten (lokale Sitzung)",
     exitDeveloperMode:
       "Entwicklermodus verlassen",
@@ -308,6 +327,8 @@ export const TEXT:
     restart: "Restart Steam",
     reload: "Reload UI",
     developerRestart:
+      "Restart Steam in Developer Mode",
+    developerRestartLocalSession:
       "Restart Steam in Developer Mode (local session)",
     exitDeveloperMode:
       "Exit Developer Mode",
@@ -340,6 +361,8 @@ export const TEXT:
     restart: "Reiniciar Steam",
     reload: "Recargar interfaz",
     developerRestart:
+      "Reiniciar Steam en modo desarrollador",
+    developerRestartLocalSession:
       "Reiniciar Steam en modo desarrollador (sesión local)",
     exitDeveloperMode:
       "Salir del modo desarrollador",
@@ -372,6 +395,8 @@ export const TEXT:
     restart: "Reiniciar Steam",
     reload: "Recargar interfaz",
     developerRestart:
+      "Reiniciar Steam en modo desarrollador",
+    developerRestartLocalSession:
       "Reiniciar Steam en modo desarrollador (sesión local)",
     exitDeveloperMode:
       "Salir del modo desarrollador",
@@ -404,6 +429,8 @@ export const TEXT:
     restart: "Επανεκκίνηση Steam",
     reload: "Επαναφόρτωση διεπαφής",
     developerRestart:
+      "Επανεκκίνηση Steam σε λειτουργία προγραμματιστή",
+    developerRestartLocalSession:
       "Επανεκκίνηση Steam σε λειτουργία προγραμματιστή (τοπική συνεδρία)",
     exitDeveloperMode:
       "Έξοδος από τη λειτουργία προγραμματιστή",
@@ -436,6 +463,8 @@ export const TEXT:
     restart: "Redémarrer Steam",
     reload: "Recharger l’interface",
     developerRestart:
+      "Redémarrer Steam en mode développeur",
+    developerRestartLocalSession:
       "Redémarrer Steam en mode développeur (session locale)",
     exitDeveloperMode:
       "Quitter le mode développeur",
@@ -468,6 +497,8 @@ export const TEXT:
     restart: "Mulai ulang Steam",
     reload: "Muat ulang antarmuka",
     developerRestart:
+      "Mulai ulang Steam dalam mode pengembang",
+    developerRestartLocalSession:
       "Mulai ulang Steam dalam mode pengembang (sesi lokal)",
     exitDeveloperMode:
       "Keluar dari mode pengembang",
@@ -500,6 +531,8 @@ export const TEXT:
     restart: "Mulakan semula Steam",
     reload: "Muat semula antara muka",
     developerRestart:
+      "Mulakan semula Steam dalam Mod Pembangun",
+    developerRestartLocalSession:
       "Mulakan semula Steam dalam Mod Pembangun (sesi setempat)",
     exitDeveloperMode:
       "Keluar daripada Mod Pembangun",
@@ -532,6 +565,8 @@ export const TEXT:
     restart: "Riavvia Steam",
     reload: "Ricarica interfaccia",
     developerRestart:
+      "Riavvia Steam in modalità sviluppatore",
+    developerRestartLocalSession:
       "Riavvia Steam in modalità sviluppatore (sessione locale)",
     exitDeveloperMode:
       "Esci dalla modalità sviluppatore",
@@ -564,6 +599,8 @@ export const TEXT:
     restart: "Steam újraindítása",
     reload: "Felület újratöltése",
     developerRestart:
+      "Steam újraindítása fejlesztői módban",
+    developerRestartLocalSession:
       "Steam újraindítása fejlesztői módban (helyi munkamenet)",
     exitDeveloperMode:
       "Kilépés a fejlesztői módból",
@@ -596,6 +633,8 @@ export const TEXT:
     restart: "Steam opnieuw starten",
     reload: "Interface herladen",
     developerRestart:
+      "Steam opnieuw starten in ontwikkelaarsmodus",
+    developerRestartLocalSession:
       "Steam opnieuw starten in ontwikkelaarsmodus (lokale sessie)",
     exitDeveloperMode:
       "Ontwikkelaarsmodus afsluiten",
@@ -628,6 +667,8 @@ export const TEXT:
     restart: "Start Steam på nytt",
     reload: "Last inn grensesnittet på nytt",
     developerRestart:
+      "Start Steam på nytt i utviklermodus",
+    developerRestartLocalSession:
       "Start Steam på nytt i utviklermodus (lokal økt)",
     exitDeveloperMode:
       "Avslutt utviklermodus",
@@ -660,6 +701,8 @@ export const TEXT:
     restart: "Uruchom ponownie Steam",
     reload: "Przeładuj interfejs",
     developerRestart:
+      "Uruchom ponownie Steam w trybie deweloperskim",
+    developerRestartLocalSession:
       "Uruchom ponownie Steam w trybie deweloperskim (sesja lokalna)",
     exitDeveloperMode:
       "Wyjdź z trybu deweloperskiego",
@@ -693,6 +736,8 @@ export const TEXT:
     restart: "Reiniciar Steam",
     reload: "Recarregar interface",
     developerRestart:
+      "Reiniciar Steam no modo de programador",
+    developerRestartLocalSession:
       "Reiniciar Steam no modo de programador (sessão local)",
     exitDeveloperMode:
       "Sair do modo de programador",
@@ -725,6 +770,8 @@ export const TEXT:
     restart: "Reiniciar Steam",
     reload: "Recarregar interface",
     developerRestart:
+      "Reiniciar Steam no modo de desenvolvedor",
+    developerRestartLocalSession:
       "Reiniciar Steam no modo de desenvolvedor (sessão local)",
     exitDeveloperMode:
       "Sair do modo de desenvolvedor",
@@ -757,6 +804,8 @@ export const TEXT:
     restart: "Repornește Steam",
     reload: "Reîncarcă interfața",
     developerRestart:
+      "Repornește Steam în modul dezvoltator",
+    developerRestartLocalSession:
       "Repornește Steam în modul dezvoltator (sesiune locală)",
     exitDeveloperMode:
       "Ieși din modul dezvoltator",
@@ -789,6 +838,8 @@ export const TEXT:
     restart: "Перезапустить Steam",
     reload: "Перезагрузить интерфейс",
     developerRestart:
+      "Перезапустить Steam в режиме разработчика",
+    developerRestartLocalSession:
       "Перезапустить Steam в режиме разработчика (локальный сеанс)",
     exitDeveloperMode:
       "Выйти из режима разработчика",
@@ -821,6 +872,8 @@ export const TEXT:
     restart: "Käynnistä Steam uudelleen",
     reload: "Lataa käyttöliittymä uudelleen",
     developerRestart:
+      "Käynnistä Steam uudelleen kehittäjätilassa",
+    developerRestartLocalSession:
       "Käynnistä Steam uudelleen kehittäjätilassa (paikallinen istunto)",
     exitDeveloperMode:
       "Poistu kehittäjätilasta",
@@ -854,6 +907,8 @@ export const TEXT:
     restart: "Starta om Steam",
     reload: "Ladda om gränssnittet",
     developerRestart:
+      "Starta om Steam i utvecklarläge",
+    developerRestartLocalSession:
       "Starta om Steam i utvecklarläge (lokal session)",
     exitDeveloperMode:
       "Avsluta utvecklarläge",
@@ -886,6 +941,8 @@ export const TEXT:
     restart: "Steam’i yeniden başlat",
     reload: "Arayüzü yenile",
     developerRestart:
+      "Steam’i geliştirici modunda yeniden başlat",
+    developerRestartLocalSession:
       "Steam’i geliştirici modunda yeniden başlat (yerel oturum)",
     exitDeveloperMode:
       "Geliştirici modundan çık",
@@ -918,6 +975,8 @@ export const TEXT:
     restart: "Khởi động lại Steam",
     reload: "Tải lại giao diện",
     developerRestart:
+      "Khởi động lại Steam ở chế độ nhà phát triển",
+    developerRestartLocalSession:
       "Khởi động lại Steam ở chế độ nhà phát triển (phiên cục bộ)",
     exitDeveloperMode:
       "Thoát chế độ nhà phát triển",
@@ -950,6 +1009,8 @@ export const TEXT:
     restart: "Перезапустити Steam",
     reload: "Перезавантажити інтерфейс",
     developerRestart:
+      "Перезапустити Steam у режимі розробника",
+    developerRestartLocalSession:
       "Перезапустити Steam у режимі розробника (локальний сеанс)",
     exitDeveloperMode:
       "Вийти з режиму розробника",
