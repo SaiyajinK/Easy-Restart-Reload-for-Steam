@@ -16,6 +16,17 @@ export const DEFAULT_SETTINGS: ActionSettings = {
   alwaysDeveloperRestart: false,
 };
 
+type RequiredAction = "reload" | "restart";
+
+interface SettingsModalState {
+  phase: "idle" | "scheduled" | "open";
+  requiredAction: RequiredAction | null;
+}
+
+interface ModalHostWindow extends Window {
+  __easyRestartReloadSettingsModalStateV15?: SettingsModalState;
+}
+
 const SETTINGS_KEY =
   "easy-restart-reload-for-steam.settings.v1.5";
 
@@ -103,52 +114,197 @@ function saveSettings(settings: ActionSettings): void {
   }
 }
 
-function ensureModalStyles(): void {
-  if (document.getElementById(MODAL_STYLE_ID)) {
+function getModalHost(): ModalHostWindow {
+  try {
+    return (window.top || window) as ModalHostWindow;
+  } catch {
+    return window as ModalHostWindow;
+  }
+}
+
+function getModalState(
+  host: ModalHostWindow,
+): SettingsModalState {
+  if (host.__easyRestartReloadSettingsModalStateV15) {
+    return host.__easyRestartReloadSettingsModalStateV15;
+  }
+
+  const state: SettingsModalState = {
+    phase: "idle",
+    requiredAction: null,
+  };
+
+  host.__easyRestartReloadSettingsModalStateV15 =
+    state;
+
+  return state;
+}
+
+function ensureModalStyles(
+  host: ModalHostWindow,
+): void {
+  const hostDocument = host.document;
+
+  if (hostDocument.getElementById(MODAL_STYLE_ID)) {
     return;
   }
 
-  const style = document.createElement("style");
+  const style = hostDocument.createElement("style");
 
   style.id = MODAL_STYLE_ID;
   style.textContent = `
-    .easy-restart-reload-confirm-modal,
-    .easy-restart-reload-confirm-modal-root {
-      flex: none !important;
+    .easy-restart-reload-modal-position {
       height: auto !important;
       min-height: 0 !important;
       max-height: calc(100vh - 64px) !important;
     }
 
-    [class*="DialogContentTransition"]:has(
-      .easy-restart-reload-confirm-modal-root
-    ) {
-      flex: none !important;
+    .easy-restart-reload-modal-position > * {
+      flex-grow: 0 !important;
+      flex-shrink: 0 !important;
+      min-height: 0 !important;
+    }
+
+    .easy-restart-reload-modal-transition {
+      flex: 0 0 auto !important;
       height: auto !important;
       min-height: 0 !important;
       max-height: calc(100vh - 64px) !important;
     }
 
-    .easy-restart-reload-confirm-modal-root
-      [class*="DialogContent_InnerWidth"],
-    .easy-restart-reload-confirm-modal-root
-      [class*="DialogBody"],
-    .easy-restart-reload-confirm-modal-root
-      [class*="DialogInnerBody"] {
+    .easy-restart-reload-modal-content {
+      position: relative !important;
+      inset: auto !important;
+      height: auto !important;
+      min-height: 0 !important;
+      max-height: calc(100vh - 64px) !important;
+    }
+
+    .easy-restart-reload-modal-inner,
+    .easy-restart-reload-modal-form,
+    .easy-restart-reload-modal-body {
       flex: none !important;
       height: auto !important;
       min-height: 0 !important;
       overflow: visible !important;
     }
 
-    .easy-restart-reload-confirm-modal-root
-      [class*="DialogFooter"] {
+    .easy-restart-reload-modal-footer {
       margin-top: 16px !important;
       padding-top: 0 !important;
     }
+
+    .easy-restart-reload-modal-description {
+      display: block;
+    }
   `;
 
-  document.head.appendChild(style);
+  hostDocument.head.appendChild(style);
+}
+
+function CompactModalDescription({
+  text,
+}: {
+  text: string;
+}) {
+  const markerRef =
+    useRef<HTMLSpanElement>(null);
+
+  useEffect(() => {
+    const marker = markerRef.current;
+
+    if (!marker) {
+      return;
+    }
+
+    const dialogBody =
+      marker.closest(".DialogBody");
+
+    const innerWidth =
+      marker.closest(".DialogContent_InnerWidth");
+
+    const dialogContent =
+      marker.closest(".DialogContent");
+
+    const transition =
+      marker.closest(".DialogContentTransition");
+
+    const positionContent =
+      marker.closest(".ModalPosition_Content");
+
+    const form =
+      innerWidth?.querySelector("form");
+
+    const footer =
+      dialogContent?.querySelector(".DialogFooter");
+
+    positionContent?.classList.add(
+      "easy-restart-reload-modal-position",
+    );
+
+    transition?.classList.add(
+      "easy-restart-reload-modal-transition",
+    );
+
+    dialogContent?.classList.add(
+      "easy-restart-reload-modal-content",
+    );
+
+    innerWidth?.classList.add(
+      "easy-restart-reload-modal-inner",
+    );
+
+    form?.classList.add(
+      "easy-restart-reload-modal-form",
+    );
+
+    dialogBody?.classList.add(
+      "easy-restart-reload-modal-body",
+    );
+
+    footer?.classList.add(
+      "easy-restart-reload-modal-footer",
+    );
+
+    return () => {
+      positionContent?.classList.remove(
+        "easy-restart-reload-modal-position",
+      );
+
+      transition?.classList.remove(
+        "easy-restart-reload-modal-transition",
+      );
+
+      dialogContent?.classList.remove(
+        "easy-restart-reload-modal-content",
+      );
+
+      innerWidth?.classList.remove(
+        "easy-restart-reload-modal-inner",
+      );
+
+      form?.classList.remove(
+        "easy-restart-reload-modal-form",
+      );
+
+      dialogBody?.classList.remove(
+        "easy-restart-reload-modal-body",
+      );
+
+      footer?.classList.remove(
+        "easy-restart-reload-modal-footer",
+      );
+    };
+  }, []);
+
+  return (
+    <span
+      ref={markerRef}
+      className="easy-restart-reload-modal-description"
+    >
+      {text}
+    </span>
+  );
 }
 
 async function restartSteamFromSettings(): Promise<void> {
@@ -178,27 +334,31 @@ async function restartSteamFromSettings(): Promise<void> {
 }
 
 function showSettingsChangeModal(
+  host: ModalHostWindow,
   labels: TranslationSet,
-  requiredAction: "reload" | "restart",
+  requiredAction: RequiredAction,
+  releaseModal: () => void,
 ): void {
-  ensureModalStyles();
+  ensureModalStyles(host);
 
   const restartRequired =
     requiredAction === "restart";
 
   showModal(
     <ConfirmModal
-      className="easy-restart-reload-confirm-modal-root"
-      modalClassName="easy-restart-reload-confirm-modal"
       strTitle={
         restartRequired
           ? labels.restartRequiredTitle
           : labels.reloadRequiredTitle
       }
       strDescription={
-        restartRequired
-          ? labels.restartRequiredDescription
-          : labels.reloadRequiredDescription
+        <CompactModalDescription
+          text={
+            restartRequired
+              ? labels.restartRequiredDescription
+              : labels.reloadRequiredDescription
+          }
+        />
       }
       strOKButtonText={
         restartRequired
@@ -207,22 +367,75 @@ function showSettingsChangeModal(
       }
       strCancelButtonText={labels.cancel}
       onOK={() => {
+        releaseModal();
+
         if (restartRequired) {
           void restartSteamFromSettings();
           return;
         }
 
-        window.location.reload();
+        host.location.reload();
       }}
-      onCancel={() => undefined}
+      onCancel={releaseModal}
     />,
-    window,
+    host,
     {
       strTitle: restartRequired
         ? labels.restartRequiredTitle
         : labels.reloadRequiredTitle,
+      fnOnClose: releaseModal,
     },
   );
+}
+
+function queueSettingsChangeModal(
+  requiredAction: RequiredAction,
+): void {
+  const host = getModalHost();
+  const state = getModalState(host);
+
+  if (state.phase === "open") {
+    return;
+  }
+
+  if (
+    state.requiredAction !== "restart" ||
+    requiredAction === "restart"
+  ) {
+    state.requiredAction = requiredAction;
+  }
+
+  if (state.phase === "scheduled") {
+    return;
+  }
+
+  state.phase = "scheduled";
+
+  host.setTimeout(() => {
+    void getLanguageKey(host.document).then(
+      (languageKey) => {
+        if (state.phase !== "scheduled") {
+          return;
+        }
+
+        const action =
+          state.requiredAction || "reload";
+
+        state.requiredAction = null;
+        state.phase = "open";
+
+        showSettingsChangeModal(
+          host,
+          TEXT[languageKey] || TEXT.english,
+          action,
+          () => {
+            state.phase = "idle";
+            state.requiredAction = null;
+          },
+        );
+      },
+    );
+  }, 50);
 }
 
 export function SettingsPanel() {
@@ -240,17 +453,13 @@ export function SettingsPanel() {
       readAppliedDeveloperRestartSetting(),
     );
 
-  const reloadRequiredRef =
-    useRef(false);
-
-  const labelsRef =
-    useRef(TEXT.english);
+  const requiredActionRef =
+    useRef<RequiredAction | null>(null);
 
   const labels =
     TEXT[language] || TEXT.english;
 
   latestSettingsRef.current = settings;
-  labelsRef.current = labels;
 
   useEffect(() => {
     let mounted = true;
@@ -275,21 +484,18 @@ export function SettingsPanel() {
           .showDeveloperRestart !==
         appliedDeveloperRestartRef.current;
 
-      if (
-        !restartRequired &&
-        !reloadRequiredRef.current
-      ) {
+      const requiredAction =
+        restartRequired
+          ? "restart"
+          : requiredActionRef.current;
+
+      requiredActionRef.current = null;
+
+      if (!requiredAction) {
         return;
       }
 
-      reloadRequiredRef.current = false;
-
-      showSettingsChangeModal(
-        labelsRef.current,
-        restartRequired
-          ? "restart"
-          : "reload",
-      );
+      queueSettingsChangeModal(requiredAction);
     };
   }, []);
 
@@ -306,8 +512,11 @@ export function SettingsPanel() {
       [key]: value,
     };
 
-    if (key !== "showDeveloperRestart") {
-      reloadRequiredRef.current = true;
+    if (
+      key !== "showDeveloperRestart" &&
+      requiredActionRef.current !== "restart"
+    ) {
+      requiredActionRef.current = "reload";
     }
 
     latestSettingsRef.current = next;
