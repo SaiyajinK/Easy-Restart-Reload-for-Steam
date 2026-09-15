@@ -44,6 +44,20 @@ async function waitForMenuItems(
   return [];
 }
 
+async function isDeveloperMode(): Promise<boolean> {
+  try {
+    return Boolean(
+      await Millennium.callServerMethod(
+        "is_developer_mode",
+        {},
+      ),
+    );
+  } catch (error: unknown) {
+    console.error("Unable to detect Steam developer mode:", error);
+    return false;
+  }
+}
+
 async function restartSteam(): Promise<void> {
   const settings = readSettings();
 
@@ -74,7 +88,10 @@ async function restartDeveloperMode(): Promise<void> {
       {},
     );
   } catch (error: unknown) {
-    console.error("Unable to restart Steam in developer mode:", error);
+    console.error(
+      "Unable to restart Steam in developer mode:",
+      error,
+    );
   }
 }
 
@@ -85,7 +102,10 @@ async function exitDeveloperMode(): Promise<void> {
       {},
     );
   } catch (error: unknown) {
-    console.error("Unable to exit Steam developer mode:", error);
+    console.error(
+      "Unable to exit Steam developer mode:",
+      error,
+    );
   }
 }
 
@@ -116,6 +136,12 @@ async function injectRootMenuItems(
 
   const settings = readSettings();
   const injectedItems: Element[] = [];
+
+  let developerModeActive = false;
+
+  if (settings.showDeveloperRestart) {
+    developerModeActive = await isDeveloperMode();
+  }
 
   // Preserve v1.3 ordering and behavior for the existing actions.
   if (settings.showRestart) {
@@ -149,7 +175,9 @@ async function injectRootMenuItems(
         () => void restartDeveloperMode(),
       ),
     );
+  }
 
+  if (developerModeActive) {
     injectedItems.push(
       createMenuItem(
         quitItem,
@@ -160,7 +188,9 @@ async function injectRootMenuItems(
     );
   }
 
-  injectedItems.forEach((item) => parent.insertBefore(item, quitItem));
+  injectedItems.forEach((item) => {
+    parent.insertBefore(item, quitItem);
+  });
 
   if (injectedItems.length > 0) {
     const separator = documentRef.createElement("div");
@@ -180,17 +210,26 @@ export default definePlugin(() => {
 
   // Intentionally preserve the v1.3 hook instead of carrying experimental
   // popup/menu fixes into v1.4.
-  Millennium.AddWindowCreateHook?.((windowInfo: SteamWindowInfo) => {
-    if (!active || windowInfo.m_strTitle !== ROOT_MENU_TITLE) {
-      return;
-    }
+  Millennium.AddWindowCreateHook?.(
+    (windowInfo: SteamWindowInfo) => {
+      if (
+        !active ||
+        windowInfo.m_strTitle !== ROOT_MENU_TITLE
+      ) {
+        return;
+      }
 
-    void injectRootMenuItems(windowInfo, trackedDocuments).catch(
-      (error: unknown) => {
-        console.error("Unable to inject the Steam root menu items:", error);
-      },
-    );
-  });
+      void injectRootMenuItems(
+        windowInfo,
+        trackedDocuments,
+      ).catch((error: unknown) => {
+        console.error(
+          "Unable to inject the Steam root menu items:",
+          error,
+        );
+      });
+    },
+  );
 
   return {
     title: "Easy Restart / Reload for Steam",
