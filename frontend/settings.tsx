@@ -1,6 +1,6 @@
 import { Field, Toggle } from "@steambrew/client";
 import { useEffect, useState } from "react";
-import { getLanguageKey, TEXT } from "./i18n";s
+import { getLanguageKey, TEXT } from "./i18n";
 
 export interface ActionSettings {
   showReload: boolean;
