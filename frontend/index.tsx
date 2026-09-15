@@ -56,7 +56,7 @@ async function restartSteam(): Promise<void> {
     } else {
       await Millennium.callServerMethod(
         "restart_normal",
-        {},s
+        {},
       );
     }
   } catch (error: unknown) {
