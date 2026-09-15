@@ -1,4 +1,4 @@
-export type TextKey =a
+export type TextKey =
   | "restart"
   | "reload"
   | "developerRestart"
