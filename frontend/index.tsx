@@ -48,7 +48,10 @@ async function restartSteam(): Promise<void> {
   const settings = readSettings();
 
   try {
-    if (settings.alwaysDeveloperRestart) {
+    if (
+      settings.showDeveloperRestart &&
+      settings.alwaysDeveloperRestart
+    ) {
       await Millennium.callServerMethod(
         "restart_developer_mode",
         {},
@@ -72,6 +75,17 @@ async function restartDeveloperMode(): Promise<void> {
     );
   } catch (error: unknown) {
     console.error("Unable to restart Steam in developer mode:", error);
+  }
+}
+
+async function exitDeveloperMode(): Promise<void> {
+  try {
+    await Millennium.callServerMethod(
+      "restart_normal",
+      {},
+    );
+  } catch (error: unknown) {
+    console.error("Unable to exit Steam developer mode:", error);
   }
 }
 
@@ -133,6 +147,15 @@ async function injectRootMenuItems(
         await translate("developerRestart", documentRef),
         "developer-restart",
         () => void restartDeveloperMode(),
+      ),
+    );
+
+    injectedItems.push(
+      createMenuItem(
+        quitItem,
+        await translate("exitDeveloperMode", documentRef),
+        "exit-developer-mode",
+        () => void exitDeveloperMode(),
       ),
     );
   }
