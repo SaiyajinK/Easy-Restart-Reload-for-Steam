@@ -60,30 +60,6 @@ async function waitForMenuItems(
   return [];
 }
 
-async function isDeveloperMode(): Promise<boolean> {
-  try {
-    const result =
-      await Millennium.callServerMethod(
-        "is_developer_mode",
-        {},
-      );
-
-    return (
-      result === true ||
-      result === 1 ||
-      result === "true" ||
-      result === "1"
-    );
-  } catch (error: unknown) {
-    console.error(
-      "Unable to detect Steam developer mode:",
-      error,
-    );
-
-    return false;
-  }
-}
-
 async function restartSteam(): Promise<void> {
   const settings = readSettings();
 
@@ -122,20 +98,6 @@ async function restartDeveloperMode(): Promise<void> {
   } catch (error: unknown) {
     console.error(
       "Unable to restart Steam in developer mode:",
-      error,
-    );
-  }
-}
-
-async function exitDeveloperMode(): Promise<void> {
-  try {
-    await Millennium.callServerMethod(
-      "restart_normal",
-      {},
-    );
-  } catch (error: unknown) {
-    console.error(
-      "Unable to exit Steam developer mode:",
       error,
     );
   }
@@ -182,13 +144,6 @@ async function injectRootMenuItems(
 
   const injectedItems: Element[] = [];
 
-  let developerModeActive = false;
-
-  if (developerRestartEnabled) {
-    developerModeActive =
-      await isDeveloperMode();
-  }
-
   // Preserve v1.3 ordering and behavior for the existing actions.
   if (settings.showRestart) {
     injectedItems.push(
@@ -229,23 +184,6 @@ async function injectRootMenuItems(
         "developer-restart",
         () =>
           void restartDeveloperMode(),
-      ),
-    );
-  }
-
-  if (
-    developerRestartEnabled &&
-    developerModeActive
-  ) {
-    injectedItems.push(
-      createMenuItem(
-        quitItem,
-        await translate(
-          "exitDeveloperMode",
-          documentRef,
-        ),
-        "exit-developer-mode",
-        () => void exitDeveloperMode(),
       ),
     );
   }
