@@ -275,3 +275,53 @@ function restart_developer_mode()
     local result_code = tonumber(ffi.cast("intptr_t", result)) or 0
     return result_code > 32
 end
+
+local function current_windows_session_uses_developer_mode()
+    local system_root = os.getenv("SystemRoot") or "C:\\Windows"
+    local powershell =
+        system_root
+        .. "\\System32\\WindowsPowerShell\\v1.0\\powershell.exe"
+
+    local script = table.concat({
+        "$steamProcesses = Get-WmiObject -Class Win32_Process",
+        "-Filter 'Name = ''steam.exe''';",
+        "foreach ($steamProcess in $steamProcesses) {",
+        "$commandLine = [string]$steamProcess.CommandLine;",
+        "if ($commandLine -match '(?i)(?:^|\\s)-dev(?:$|\\s)') { exit 0 }",
+        "};",
+        "exit 1",
+    }, " ")
+
+    local command = table.concat({
+        quote_arg(powershell),
+        "-NoLogo",
+        "-NoProfile",
+        "-NonInteractive",
+        "-WindowStyle Hidden",
+        "-Command " .. quote_arg(script),
+    }, " ")
+
+    local _, status = utils.exec(command)
+    return status == 0
+end
+
+---@ffi
+---@return boolean
+function restart_current_session()
+    local path_separator = package.config:sub(1, 1)
+
+    -- Keep the existing Linux behavior unchanged.
+    if path_separator == "/" then
+        return restart_normal()
+    end
+
+    if path_separator ~= "\\" then
+        return false
+    end
+
+    if current_windows_session_uses_developer_mode() then
+        return restart_developer_mode()
+    end
+
+    return restart_normal()
+end
