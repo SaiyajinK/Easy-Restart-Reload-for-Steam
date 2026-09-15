@@ -1,4 +1,4 @@
-import { Millennium, definePlugin } from "@steambrew/client";
+import { Millennium, definePlugin } from "@steambrew/client";d
 import {
   SettingsPanel,
   readAppliedDeveloperRestartSetting,
