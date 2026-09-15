@@ -6,31 +6,48 @@ export interface ActionSettings {
   showReload: boolean;
   showRestart: boolean;
   showDeveloperRestart: boolean;
+  alwaysDeveloperRestart: boolean;
 }
 
 export const DEFAULT_SETTINGS: ActionSettings = {
   showReload: true,
   showRestart: true,
   showDeveloperRestart: false,
+  alwaysDeveloperRestart: false,
 };
 
-const SETTINGS_KEY = "easy-restart-reload-for-steam.settings.v1.4";
+const SETTINGS_KEY = "easy-restart-reload-for-steam.settings.v1.5";
 
 export function readSettings(): ActionSettings {
   try {
     const stored = window.localStorage.getItem(SETTINGS_KEY);
+
     if (!stored) {
       return { ...DEFAULT_SETTINGS };
     }
 
     const parsed = JSON.parse(stored) as Partial<ActionSettings>;
+
     return {
-      showReload: typeof parsed.showReload === "boolean" ? parsed.showReload : DEFAULT_SETTINGS.showReload,
-      showRestart: typeof parsed.showRestart === "boolean" ? parsed.showRestart : DEFAULT_SETTINGS.showRestart,
+      showReload:
+        typeof parsed.showReload === "boolean"
+          ? parsed.showReload
+          : DEFAULT_SETTINGS.showReload,
+
+      showRestart:
+        typeof parsed.showRestart === "boolean"
+          ? parsed.showRestart
+          : DEFAULT_SETTINGS.showRestart,
+
       showDeveloperRestart:
         typeof parsed.showDeveloperRestart === "boolean"
           ? parsed.showDeveloperRestart
           : DEFAULT_SETTINGS.showDeveloperRestart,
+
+      alwaysDeveloperRestart:
+        typeof parsed.alwaysDeveloperRestart === "boolean"
+          ? parsed.alwaysDeveloperRestart
+          : DEFAULT_SETTINGS.alwaysDeveloperRestart,
     };
   } catch {
     return { ...DEFAULT_SETTINGS };
@@ -73,22 +90,43 @@ export function SettingsPanel() {
 
   return (
     <div>
-      <Field label={labels.reload}>
+      <Field
+        label={labels.reload}
+        description={labels.reloadDescription}
+      >
         <Toggle
           value={settings.showReload}
           onChange={(checked) => update("showReload", checked)}
         />
       </Field>
-      <Field label={labels.restart}>
+
+      <Field
+        label={labels.restart}
+        description={labels.restartDescription}
+      >
         <Toggle
           value={settings.showRestart}
           onChange={(checked) => update("showRestart", checked)}
         />
       </Field>
-      <Field label={labels.developerRestart}>
+
+      <Field
+        label={labels.developerRestart}
+        description={labels.developerRestartDescription}
+      >
         <Toggle
           value={settings.showDeveloperRestart}
           onChange={(checked) => update("showDeveloperRestart", checked)}
+        />
+      </Field>
+
+      <Field
+        label={labels.alwaysDeveloperRestart}
+        description={labels.alwaysDeveloperRestartDescription}
+      >
+        <Toggle
+          value={settings.alwaysDeveloperRestart}
+          onChange={(checked) => update("alwaysDeveloperRestart", checked)}
         />
       </Field>
     </div>
