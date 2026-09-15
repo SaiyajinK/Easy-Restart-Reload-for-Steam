@@ -31,6 +31,34 @@ local function utf8_to_wide(ffi, kernel32, value)
     return buffer
 end
 
+---@return boolean
+function restart_normal()
+    local path_separator = package.config:sub(1, 1)
+
+    -- Linux only.
+    if path_separator ~= "/" then
+        return false
+    end
+
+    local backend_path = utils.get_backend_path()
+    if not backend_path or backend_path == "" then
+        return false
+    end
+
+    local helper = fs.join(backend_path, "restart-normal.sh")
+    if not fs.is_file(helper) then
+        return false
+    end
+
+    local command =
+        "nohup /bin/sh "
+        .. quote_shell_arg(helper)
+        .. " </dev/null >/dev/null 2>&1 &"
+
+    local _, status = utils.exec(command)
+    return status == 0
+end
+
 ---@ffi
 ---@return boolean
 function restart_developer_mode()
