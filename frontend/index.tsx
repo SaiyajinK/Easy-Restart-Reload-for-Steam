@@ -55,17 +55,18 @@ async function waitForMenuItems(
 }
 
 async function restartSteam(): Promise<void> {
-  try {
-    const handled = await Millennium.callServerMethod(
-      "restart_normal",
-      {},
-    );
+  const isLinux =
+    navigator.userAgent.toLowerCase().includes("linux") ||
+    navigator.platform.toLowerCase().includes("linux");
 
-    if (handled === true) {
-      return;
+  if (isLinux) {
+    try {
+      await Millennium.callServerMethod("restart_normal", {});
+    } catch (error: unknown) {
+      console.error("Unable to restart Steam on Linux:", error);
     }
-  } catch (error: unknown) {
-    console.error("Unable to restart Steam through backend:", error);
+
+    return;
   }
 
   steamWindow.SteamClient?.User?.StartRestart?.(true);
