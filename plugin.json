@@ -3,7 +3,7 @@
   "name": "easy-restart-reload-for-steam",
   "common_name": "Easy Restart / Reload for Steam",
   "description": "Adds configurable Restart, Reload UI, and Developer Mode restart actions to the Steam root menu.",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "useBackend": true,
   "backendType": "lua"
 }
