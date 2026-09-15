@@ -67,14 +67,18 @@ async function restartSteam(): Promise<void> {
     readAppliedDeveloperRestartSetting();
 
   try {
-    if (
-      developerRestartEnabled &&
-      settings.alwaysDeveloperRestart
-    ) {
-      await Millennium.callServerMethod(
-        "restart_developer_mode",
-        {},
-      );
+    if (developerRestartEnabled) {
+      if (settings.alwaysDeveloperRestart) {
+        await Millennium.callServerMethod(
+          "restart_developer_mode",
+          {},
+        );
+      } else {
+        await Millennium.callServerMethod(
+          "restart_normal",
+          {},
+        );
+      }
     } else {
       await Millennium.callServerMethod(
         "restart_current_session",
