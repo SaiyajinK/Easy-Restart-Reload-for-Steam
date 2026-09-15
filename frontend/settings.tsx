@@ -220,10 +220,7 @@ async function restartSteamFromSettings(): Promise<void> {
   const settings = readSettings();
 
   try {
-    if (
-      settings.showDeveloperRestart &&
-      settings.alwaysDeveloperRestart
-    ) {
+    if (settings.showDeveloperRestart) {
       await Millennium.callServerMethod(
         "restart_developer_mode",
         {},
