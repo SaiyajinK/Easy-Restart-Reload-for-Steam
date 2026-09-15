@@ -29,7 +29,7 @@ export const TEXT:
     developerRestart:
       "以开发者模式重启 Steam",
     developerRestartLocalSession:
-      "以开发者模式重启 Steam（本地会话）",
+      "以开发者模式重启 Steam（当前会话）",
     exitDeveloperMode: "退出开发者模式",
     restartDescription:
       "完全重启 Steam 客户端。",
@@ -60,7 +60,7 @@ export const TEXT:
     developerRestart:
       "以開發者模式重新啟動 Steam",
     developerRestartLocalSession:
-      "以開發者模式重新啟動 Steam（本機工作階段）",
+      "以開發者模式重新啟動 Steam（目前的工作階段）",
     exitDeveloperMode: "退出開發者模式",
     restartDescription:
       "完整重新啟動 Steam 用戶端。",
@@ -91,7 +91,7 @@ export const TEXT:
     developerRestart:
       "Steam を開発者モードで再起動",
     developerRestartLocalSession:
-      "Steam を開発者モードで再起動（ローカルセッション）",
+      "Steam を開発者モードで再起動（現在のセッション）",
     exitDeveloperMode:
       "開発者モードを終了",
     restartDescription:
@@ -125,7 +125,7 @@ export const TEXT:
     developerRestart:
       "개발자 모드로 Steam 재시작",
     developerRestartLocalSession:
-      "개발자 모드로 Steam 재시작 (로컬 세션)",
+      "개발자 모드로 Steam 재시작 (현재 세션)",
     exitDeveloperMode:
       "개발자 모드 종료",
     restartDescription:
@@ -159,7 +159,7 @@ export const TEXT:
     developerRestart:
       "รีสตาร์ท Steam ในโหมดนักพัฒนา",
     developerRestartLocalSession:
-      "รีสตาร์ท Steam ในโหมดนักพัฒนา (เซสชันภายในเครื่อง)",
+      "รีสตาร์ท Steam ในโหมดนักพัฒนา (เซสชันปัจจุบัน)",
     exitDeveloperMode:
       "ออกจากโหมดนักพัฒนา",
     restartDescription:
@@ -193,7 +193,7 @@ export const TEXT:
     developerRestart:
       "Рестартирай Steam в режим за разработчици",
     developerRestartLocalSession:
-      "Рестартирай Steam в режим за разработчици (локална сесия)",
+      "Рестартирай Steam в режим за разработчици (текущата сесия)",
     exitDeveloperMode:
       "Изход от режима за разработчици",
     restartDescription:
@@ -227,7 +227,7 @@ export const TEXT:
     developerRestart:
       "Restartovat Steam ve vývojářském režimu",
     developerRestartLocalSession:
-      "Restartovat Steam ve vývojářském režimu (místní relace)",
+      "Restartovat Steam ve vývojářském režimu (aktuální relace)",
     exitDeveloperMode:
       "Ukončit vývojářský režim",
     restartDescription:
@@ -261,7 +261,7 @@ export const TEXT:
     developerRestart:
       "Genstart Steam i udviklertilstand",
     developerRestartLocalSession:
-      "Genstart Steam i udviklertilstand (lokal session)",
+      "Genstart Steam i udviklertilstand (aktuel session)",
     exitDeveloperMode:
       "Afslut udviklertilstand",
     restartDescription:
@@ -295,7 +295,7 @@ export const TEXT:
     developerRestart:
       "Steam im Entwicklermodus neu starten",
     developerRestartLocalSession:
-      "Steam im Entwicklermodus neu starten (lokale Sitzung)",
+      "Steam im Entwicklermodus neu starten (aktuelle Sitzung)",
     exitDeveloperMode:
       "Entwicklermodus verlassen",
     restartDescription:
@@ -329,7 +329,7 @@ export const TEXT:
     developerRestart:
       "Restart Steam in Developer Mode",
     developerRestartLocalSession:
-      "Restart Steam in Developer Mode (local session)",
+      "Restart Steam in Developer Mode (current session)",
     exitDeveloperMode:
       "Exit Developer Mode",
     restartDescription:
@@ -363,7 +363,7 @@ export const TEXT:
     developerRestart:
       "Reiniciar Steam en modo desarrollador",
     developerRestartLocalSession:
-      "Reiniciar Steam en modo desarrollador (sesión local)",
+      "Reiniciar Steam en modo desarrollador (sesión actual)",
     exitDeveloperMode:
       "Salir del modo desarrollador",
     restartDescription:
@@ -397,7 +397,7 @@ export const TEXT:
     developerRestart:
       "Reiniciar Steam en modo desarrollador",
     developerRestartLocalSession:
-      "Reiniciar Steam en modo desarrollador (sesión local)",
+      "Reiniciar Steam en modo desarrollador (sesión actual)",
     exitDeveloperMode:
       "Salir del modo desarrollador",
     restartDescription:
@@ -431,7 +431,7 @@ export const TEXT:
     developerRestart:
       "Επανεκκίνηση Steam σε λειτουργία προγραμματιστή",
     developerRestartLocalSession:
-      "Επανεκκίνηση Steam σε λειτουργία προγραμματιστή (τοπική συνεδρία)",
+      "Επανεκκίνηση Steam σε λειτουργία προγραμματιστή (τρέχουσα συνεδρία)",
     exitDeveloperMode:
       "Έξοδος από τη λειτουργία προγραμματιστή",
     restartDescription:
@@ -465,7 +465,7 @@ export const TEXT:
     developerRestart:
       "Redémarrer Steam en mode développeur",
     developerRestartLocalSession:
-      "Redémarrer Steam en mode développeur (session locale)",
+      "Redémarrer Steam en mode développeur (session en cours)",
     exitDeveloperMode:
       "Quitter le mode développeur",
     restartDescription:
@@ -499,7 +499,7 @@ export const TEXT:
     developerRestart:
       "Mulai ulang Steam dalam mode pengembang",
     developerRestartLocalSession:
-      "Mulai ulang Steam dalam mode pengembang (sesi lokal)",
+      "Mulai ulang Steam dalam mode pengembang (sesi saat ini)",
     exitDeveloperMode:
       "Keluar dari mode pengembang",
     restartDescription:
@@ -533,7 +533,7 @@ export const TEXT:
     developerRestart:
       "Mulakan semula Steam dalam Mod Pembangun",
     developerRestartLocalSession:
-      "Mulakan semula Steam dalam Mod Pembangun (sesi setempat)",
+      "Mulakan semula Steam dalam Mod Pembangun (sesi semasa)",
     exitDeveloperMode:
       "Keluar daripada Mod Pembangun",
     restartDescription:
@@ -567,7 +567,7 @@ export const TEXT:
     developerRestart:
       "Riavvia Steam in modalità sviluppatore",
     developerRestartLocalSession:
-      "Riavvia Steam in modalità sviluppatore (sessione locale)",
+      "Riavvia Steam in modalità sviluppatore (sessione corrente)",
     exitDeveloperMode:
       "Esci dalla modalità sviluppatore",
     restartDescription:
@@ -601,7 +601,7 @@ export const TEXT:
     developerRestart:
       "Steam újraindítása fejlesztői módban",
     developerRestartLocalSession:
-      "Steam újraindítása fejlesztői módban (helyi munkamenet)",
+      "Steam újraindítása fejlesztői módban (aktuális munkamenet)",
     exitDeveloperMode:
       "Kilépés a fejlesztői módból",
     restartDescription:
@@ -635,7 +635,7 @@ export const TEXT:
     developerRestart:
       "Steam opnieuw starten in ontwikkelaarsmodus",
     developerRestartLocalSession:
-      "Steam opnieuw starten in ontwikkelaarsmodus (lokale sessie)",
+      "Steam opnieuw starten in ontwikkelaarsmodus (huidige sessie)",
     exitDeveloperMode:
       "Ontwikkelaarsmodus afsluiten",
     restartDescription:
@@ -669,7 +669,7 @@ export const TEXT:
     developerRestart:
       "Start Steam på nytt i utviklermodus",
     developerRestartLocalSession:
-      "Start Steam på nytt i utviklermodus (lokal økt)",
+      "Start Steam på nytt i utviklermodus (gjeldende økt)",
     exitDeveloperMode:
       "Avslutt utviklermodus",
     restartDescription:
@@ -703,7 +703,7 @@ export const TEXT:
     developerRestart:
       "Uruchom ponownie Steam w trybie deweloperskim",
     developerRestartLocalSession:
-      "Uruchom ponownie Steam w trybie deweloperskim (sesja lokalna)",
+      "Uruchom ponownie Steam w trybie deweloperskim (bieżąca sesja)",
     exitDeveloperMode:
       "Wyjdź z trybu deweloperskiego",
     restartDescription:
@@ -738,7 +738,7 @@ export const TEXT:
     developerRestart:
       "Reiniciar Steam no modo de programador",
     developerRestartLocalSession:
-      "Reiniciar Steam no modo de programador (sessão local)",
+      "Reiniciar Steam no modo de programador (sessão atual)",
     exitDeveloperMode:
       "Sair do modo de programador",
     restartDescription:
@@ -772,7 +772,7 @@ export const TEXT:
     developerRestart:
       "Reiniciar Steam no modo de desenvolvedor",
     developerRestartLocalSession:
-      "Reiniciar Steam no modo de desenvolvedor (sessão local)",
+      "Reiniciar Steam no modo de desenvolvedor (sessão atual)",
     exitDeveloperMode:
       "Sair do modo de desenvolvedor",
     restartDescription:
@@ -806,7 +806,7 @@ export const TEXT:
     developerRestart:
       "Repornește Steam în modul dezvoltator",
     developerRestartLocalSession:
-      "Repornește Steam în modul dezvoltator (sesiune locală)",
+      "Repornește Steam în modul dezvoltator (sesiunea curentă)",
     exitDeveloperMode:
       "Ieși din modul dezvoltator",
     restartDescription:
@@ -840,7 +840,7 @@ export const TEXT:
     developerRestart:
       "Перезапустить Steam в режиме разработчика",
     developerRestartLocalSession:
-      "Перезапустить Steam в режиме разработчика (локальный сеанс)",
+      "Перезапустить Steam в режиме разработчика (текущий сеанс)",
     exitDeveloperMode:
       "Выйти из режима разработчика",
     restartDescription:
@@ -874,7 +874,7 @@ export const TEXT:
     developerRestart:
       "Käynnistä Steam uudelleen kehittäjätilassa",
     developerRestartLocalSession:
-      "Käynnistä Steam uudelleen kehittäjätilassa (paikallinen istunto)",
+      "Käynnistä Steam uudelleen kehittäjätilassa (nykyinen istunto)",
     exitDeveloperMode:
       "Poistu kehittäjätilasta",
     restartDescription:
@@ -909,7 +909,7 @@ export const TEXT:
     developerRestart:
       "Starta om Steam i utvecklarläge",
     developerRestartLocalSession:
-      "Starta om Steam i utvecklarläge (lokal session)",
+      "Starta om Steam i utvecklarläge (aktuell session)",
     exitDeveloperMode:
       "Avsluta utvecklarläge",
     restartDescription:
@@ -943,7 +943,7 @@ export const TEXT:
     developerRestart:
       "Steam’i geliştirici modunda yeniden başlat",
     developerRestartLocalSession:
-      "Steam’i geliştirici modunda yeniden başlat (yerel oturum)",
+      "Steam’i geliştirici modunda yeniden başlat (geçerli oturum)",
     exitDeveloperMode:
       "Geliştirici modundan çık",
     restartDescription:
@@ -977,7 +977,7 @@ export const TEXT:
     developerRestart:
       "Khởi động lại Steam ở chế độ nhà phát triển",
     developerRestartLocalSession:
-      "Khởi động lại Steam ở chế độ nhà phát triển (phiên cục bộ)",
+      "Khởi động lại Steam ở chế độ nhà phát triển (phiên hiện tại)",
     exitDeveloperMode:
       "Thoát chế độ nhà phát triển",
     restartDescription:
@@ -1011,7 +1011,7 @@ export const TEXT:
     developerRestart:
       "Перезапустити Steam у режимі розробника",
     developerRestartLocalSession:
-      "Перезапустити Steam у режимі розробника (локальний сеанс)",
+      "Перезапустити Steam у режимі розробника (поточний сеанс)",
     exitDeveloperMode:
       "Вийти з режиму розробника",
     restartDescription:
