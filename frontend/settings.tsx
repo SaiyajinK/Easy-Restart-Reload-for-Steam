@@ -519,7 +519,7 @@ export function SettingsPanel() {
       <div className="easy-restart-developer-group">
         <Field
           className="easy-restart-developer-field"
-          label={labels.developerRestart}
+          label={labels.developerRestartLocalSession}
           description={
             labels.developerRestartDescription
           }
