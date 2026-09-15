@@ -153,158 +153,67 @@ function ensureModalStyles(
 
   style.id = MODAL_STYLE_ID;
   style.textContent = `
-    .easy-restart-reload-modal-position {
+    .easy-restart-reload-modal-position
+      > .ModalPosition_Content {
       height: auto !important;
       min-height: 0 !important;
       max-height: calc(100vh - 64px) !important;
     }
 
-    .easy-restart-reload-modal-position > * {
-      flex-grow: 0 !important;
-      flex-shrink: 0 !important;
-      min-height: 0 !important;
-    }
-
-    .easy-restart-reload-modal-transition {
+    .easy-restart-reload-modal-position
+      .DialogContentTransition {
       flex: 0 0 auto !important;
       height: auto !important;
       min-height: 0 !important;
       max-height: calc(100vh - 64px) !important;
     }
 
-    .easy-restart-reload-modal-content {
+    .easy-restart-reload-modal-position
+      .DialogContentTransition
+      > .easy-restart-reload-modal-content {
       position: relative !important;
       inset: auto !important;
+    }
+
+    .easy-restart-reload-modal-content {
+      flex: none !important;
       height: auto !important;
       min-height: 0 !important;
       max-height: calc(100vh - 64px) !important;
     }
 
-    .easy-restart-reload-modal-inner,
-    .easy-restart-reload-modal-form,
-    .easy-restart-reload-modal-body {
+    .easy-restart-reload-modal-content
+      > .DialogContent_InnerWidth {
       flex: none !important;
       height: auto !important;
       min-height: 0 !important;
       overflow: visible !important;
     }
 
-    .easy-restart-reload-modal-footer {
-      margin-top: 16px !important;
-      padding-top: 0 !important;
+    .easy-restart-reload-modal-content
+      > .DialogContent_InnerWidth
+      > form {
+      flex: none !important;
+      height: auto !important;
+      min-height: 0 !important;
     }
 
-    .easy-restart-reload-modal-description {
-      display: block;
+    .easy-restart-reload-modal-content
+      .DialogBody {
+      flex: none !important;
+      height: auto !important;
+      min-height: 0 !important;
+      overflow: visible !important;
+    }
+
+    .easy-restart-reload-modal-content
+      .DialogFooter {
+      margin-top: 16px !important;
+      padding-top: 0 !important;
     }
   `;
 
   hostDocument.head.appendChild(style);
-}
-
-function CompactModalDescription({
-  text,
-}: {
-  text: string;
-}) {
-  const markerRef =
-    useRef<HTMLSpanElement>(null);
-
-  useEffect(() => {
-    const marker = markerRef.current;
-
-    if (!marker) {
-      return undefined;
-    }
-
-    const dialogBody =
-      marker.closest(".DialogBody");
-
-    const innerWidth =
-      marker.closest(".DialogContent_InnerWidth");
-
-    const dialogContent =
-      marker.closest(".DialogContent");
-
-    const transition =
-      marker.closest(".DialogContentTransition");
-
-    const positionContent =
-      marker.closest(".ModalPosition_Content");
-
-    const form =
-      innerWidth?.querySelector("form");
-
-    const footer =
-      dialogContent?.querySelector(".DialogFooter");
-
-    positionContent?.classList.add(
-      "easy-restart-reload-modal-position",
-    );
-
-    transition?.classList.add(
-      "easy-restart-reload-modal-transition",
-    );
-
-    dialogContent?.classList.add(
-      "easy-restart-reload-modal-content",
-    );
-
-    innerWidth?.classList.add(
-      "easy-restart-reload-modal-inner",
-    );
-
-    form?.classList.add(
-      "easy-restart-reload-modal-form",
-    );
-
-    dialogBody?.classList.add(
-      "easy-restart-reload-modal-body",
-    );
-
-    footer?.classList.add(
-      "easy-restart-reload-modal-footer",
-    );
-
-    return () => {
-      positionContent?.classList.remove(
-        "easy-restart-reload-modal-position",
-      );
-
-      transition?.classList.remove(
-        "easy-restart-reload-modal-transition",
-      );
-
-      dialogContent?.classList.remove(
-        "easy-restart-reload-modal-content",
-      );
-
-      innerWidth?.classList.remove(
-        "easy-restart-reload-modal-inner",
-      );
-
-      form?.classList.remove(
-        "easy-restart-reload-modal-form",
-      );
-
-      dialogBody?.classList.remove(
-        "easy-restart-reload-modal-body",
-      );
-
-      footer?.classList.remove(
-        "easy-restart-reload-modal-footer",
-      );
-    };
-  }, []);
-
-  return (
-    <span
-      ref={markerRef}
-      className="easy-restart-reload-modal-description"
-    >
-      {text}
-    </span>
-  );
 }
 
 async function restartSteamFromSettings(): Promise<void> {
@@ -346,19 +255,17 @@ function showSettingsChangeModal(
 
   showModal(
     <ConfirmModal
+      className="easy-restart-reload-modal-content"
+      modalClassName="easy-restart-reload-modal-position"
       strTitle={
         restartRequired
           ? labels.restartRequiredTitle
           : labels.reloadRequiredTitle
       }
       strDescription={
-        <CompactModalDescription
-          text={
-            restartRequired
-              ? labels.restartRequiredDescription
-              : labels.reloadRequiredDescription
-          }
-        />
+        restartRequired
+          ? labels.restartRequiredDescription
+          : labels.reloadRequiredDescription
       }
       strOKButtonText={
         restartRequired
@@ -366,14 +273,14 @@ function showSettingsChangeModal(
           : labels.reloadNow
       }
       strCancelButtonText={labels.cancel}
-      onOK={() => {
-        releaseModal();
-
+      onOK={async () => {
         if (restartRequired) {
-          void restartSteamFromSettings();
+          await restartSteamFromSettings();
+          releaseModal();
           return;
         }
 
+        releaseModal();
         host.location.reload();
       }}
       onCancel={releaseModal}
