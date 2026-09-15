@@ -77,7 +77,7 @@ async function restartSteam(): Promise<void> {
       );
     } else {
       await Millennium.callServerMethod(
-        "restart_normal",
+        "restart_current_session",
         {},
       );
     }
