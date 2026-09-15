@@ -1,8 +1,15 @@
 local millennium = require("millennium")
+local utils = require("utils")
+local fs = require("fs")
 
 local function quote_arg(value)
     local text = tostring(value or "")
     return '"' .. text:gsub('"', '\\"') .. '"'
+end
+
+local function quote_shell_arg(value)
+    local text = tostring(value or "")
+    return "'" .. text:gsub("'", "'\\''") .. "'"
 end
 
 local function utf8_to_wide(ffi, kernel32, value)
@@ -27,10 +34,35 @@ end
 ---@ffi
 ---@return boolean
 function restart_developer_mode()
-    if package.config:sub(1, 1) ~= "\\" then
+    local path_separator = package.config:sub(1, 1)
+
+    -- Linux
+    if path_separator == "/" then
+        local backend_path = utils.get_backend_path()
+        if not backend_path or backend_path == "" then
+            return false
+        end
+
+        local helper = fs.join(backend_path, "restart-dev.sh")
+        if not fs.is_file(helper) then
+            return false
+        end
+
+        local command =
+            "nohup /bin/sh "
+            .. quote_shell_arg(helper)
+            .. " </dev/null >/dev/null 2>&1 &"
+
+        local _, status = utils.exec(command)
+        return status == 0
+    end
+
+    -- Unsupported platform
+    if path_separator ~= "\\" then
         return false
     end
 
+    -- Windows
     local steam_path = millennium.steam_path()
     if not steam_path or steam_path == "" then
         return false
