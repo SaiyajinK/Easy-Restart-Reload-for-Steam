@@ -22,7 +22,7 @@ export function readSettings(): ActionSettings {
   try {
     const stored = window.localStorage.getItem(SETTINGS_KEY);
 
-    if (!stored) {
+    if (!stored) {s
       return { ...DEFAULT_SETTINGS };
     }
 
