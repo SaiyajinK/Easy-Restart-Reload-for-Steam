@@ -12,6 +12,87 @@ local function quote_shell_arg(value)
     return "'" .. text:gsub("'", "'\\''") .. "'"
 end
 
+local function contains_dev_argument(command_line)
+    local padded = " " .. tostring(command_line or "") .. " "
+    return padded:find('[%s"]%-dev[%s"]') ~= nil
+end
+
+local function read_latest_webhelper_command_line(log_path)
+    local handle = io.open(log_path, "r")
+
+    if not handle then
+        return nil
+    end
+
+    local latest_command_line = nil
+
+    for line in handle:lines() do
+        if line:find("Startup - webhelper launched", 1, true) then
+            latest_command_line = line
+        end
+    end
+
+    handle:close()
+    return latest_command_line
+end
+
+local function add_unique_path(paths, seen, path)
+    if not path or path == "" or seen[path] then
+        return
+    end
+
+    seen[path] = true
+    table.insert(paths, path)
+end
+
+local function get_webhelper_log_paths()
+    local paths = {}
+    local seen = {}
+    local steam_path = millennium.steam_path()
+
+    if steam_path and steam_path ~= "" then
+        add_unique_path(
+            paths,
+            seen,
+            fs.join(fs.join(steam_path, "logs"), "webhelper.txt")
+        )
+    end
+
+    if package.config:sub(1, 1) == "/" then
+        local user_home = os.getenv("HOME")
+
+        if user_home and user_home ~= "" then
+            add_unique_path(
+                paths,
+                seen,
+                user_home .. "/.local/share/Steam/logs/webhelper.txt"
+            )
+
+            add_unique_path(
+                paths,
+                seen,
+                user_home .. "/.steam/steam/logs/webhelper.txt"
+            )
+        end
+    end
+
+    return paths
+end
+
+---@ffi
+---@return boolean
+function is_developer_mode()
+    for _, log_path in ipairs(get_webhelper_log_paths()) do
+        local command_line = read_latest_webhelper_command_line(log_path)
+
+        if command_line then
+            return contains_dev_argument(command_line)
+        end
+    end
+
+    return false
+end
+
 local function utf8_to_wide(ffi, kernel32, value)
     local CP_UTF8 = 65001
     local input = tostring(value or "")
@@ -22,7 +103,14 @@ local function utf8_to_wide(ffi, kernel32, value)
     end
 
     local buffer = ffi.new("WCHAR[?]", required)
-    local written = kernel32.MultiByteToWideChar(CP_UTF8, 0, input, -1, buffer, required)
+    local written = kernel32.MultiByteToWideChar(
+        CP_UTF8,
+        0,
+        input,
+        -1,
+        buffer,
+        required
+    )
 
     if written <= 0 then
         return nil
@@ -39,11 +127,13 @@ function restart_normal()
     -- Linux
     if path_separator == "/" then
         local backend_path = utils.get_backend_path()
+
         if not backend_path or backend_path == "" then
             return false
         end
 
         local helper = fs.join(backend_path, "restart-normal.sh")
+
         if not fs.is_file(helper) then
             return false
         end
@@ -64,11 +154,13 @@ function restart_normal()
 
     -- Windows
     local steam_path = millennium.steam_path()
+
     if not steam_path or steam_path == "" then
         return false
     end
 
     local ok_ffi, ffi = pcall(require, "ffi")
+
     if not ok_ffi or not ffi then
         return false
     end
@@ -105,8 +197,14 @@ function restart_normal()
     end
 
     local system_root = os.getenv("SystemRoot") or "C:\\Windows"
-    local powershell = system_root .. "\\System32\\WindowsPowerShell\\v1.0\\powershell.exe"
-    local helper = steam_path .. "\\millennium\\plugins\\easy-restart-reload-for-steam\\backend\\restart-normal.ps1"
+    local powershell =
+        system_root
+        .. "\\System32\\WindowsPowerShell\\v1.0\\powershell.exe"
+
+    local helper =
+        steam_path
+        .. "\\millennium\\plugins\\easy-restart-reload-for-steam"
+        .. "\\backend\\restart-normal.ps1"
 
     local parameters = table.concat({
         "-NoLogo",
@@ -148,11 +246,13 @@ function restart_developer_mode()
     -- Linux
     if path_separator == "/" then
         local backend_path = utils.get_backend_path()
+
         if not backend_path or backend_path == "" then
             return false
         end
 
         local helper = fs.join(backend_path, "restart-dev.sh")
+
         if not fs.is_file(helper) then
             return false
         end
@@ -173,11 +273,13 @@ function restart_developer_mode()
 
     -- Windows
     local steam_path = millennium.steam_path()
+
     if not steam_path or steam_path == "" then
         return false
     end
 
     local ok_ffi, ffi = pcall(require, "ffi")
+
     if not ok_ffi or not ffi then
         return false
     end
@@ -214,8 +316,14 @@ function restart_developer_mode()
     end
 
     local system_root = os.getenv("SystemRoot") or "C:\\Windows"
-    local powershell = system_root .. "\\System32\\WindowsPowerShell\\v1.0\\powershell.exe"
-    local helper = steam_path .. "\\millennium\\plugins\\easy-restart-reload-for-steam\\backend\\restart-dev.ps1"
+    local powershell =
+        system_root
+        .. "\\System32\\WindowsPowerShell\\v1.0\\powershell.exe"
+
+    local helper =
+        steam_path
+        .. "\\millennium\\plugins\\easy-restart-reload-for-steam"
+        .. "\\backend\\restart-dev.ps1"
 
     local parameters = table.concat({
         "-NoLogo",
