@@ -12,82 +12,69 @@ local function quote_shell_arg(value)
     return "'" .. text:gsub("'", "'\\''") .. "'"
 end
 
-local function contains_dev_argument(command_line)
-    local padded = " " .. tostring(command_line or "") .. " "
-    return padded:find('[%s"]%-dev[%s"]') ~= nil
+local function detect_linux_developer_mode()
+    local script = table.concat({
+        "for process_path in /proc/[0-9]*; do",
+        "[ -r \"$process_path/comm\" ] || continue;",
+        "process_name=$(cat \"$process_path/comm\" 2>/dev/null);",
+        "[ \"$process_name\" = \"steam\" ]",
+        "|| [ \"$process_name\" = \"steam.sh\" ]",
+        "|| [ \"$process_name\" = \"steamwebhelper\" ]",
+        "|| continue;",
+        "tr '\\000' '\\n' < \"$process_path/cmdline\" 2>/dev/null",
+        "| grep -Fx -- '-dev' >/dev/null 2>&1 && exit 0;",
+        "done;",
+        "exit 1",
+    }, " ")
+
+    local _, status =
+        utils.exec("/bin/sh -c " .. quote_shell_arg(script))
+
+    return status == 0
 end
 
-local function read_latest_webhelper_command_line(log_path)
-    local handle = io.open(log_path, "r")
+local function detect_windows_developer_mode()
+    local system_root = os.getenv("SystemRoot") or "C:\\Windows"
+    local powershell =
+        system_root
+        .. "\\System32\\WindowsPowerShell\\v1.0\\powershell.exe"
 
-    if not handle then
-        return nil
-    end
+    local script = table.concat({
+        "$steamProcesses = Get-WmiObject",
+        "-Class Win32_Process",
+        "-Filter 'Name = ''steam.exe''';",
+        "foreach ($steamProcess in $steamProcesses) {",
+        "$commandLine = [string]$steamProcess.CommandLine;",
+        "if ($commandLine -match '(?i)(?:^|\\s)-dev(?:$|\\s)')",
+        "{ exit 0 }",
+        "};",
+        "exit 1",
+    }, " ")
 
-    local latest_command_line = nil
+    local command = table.concat({
+        quote_arg(powershell),
+        "-NoLogo",
+        "-NoProfile",
+        "-NonInteractive",
+        "-WindowStyle Hidden",
+        "-Command " .. quote_arg(script),
+    }, " ")
 
-    for line in handle:lines() do
-        if line:find("Startup - webhelper launched", 1, true) then
-            latest_command_line = line
-        end
-    end
-
-    handle:close()
-    return latest_command_line
-end
-
-local function add_unique_path(paths, seen, path)
-    if not path or path == "" or seen[path] then
-        return
-    end
-
-    seen[path] = true
-    table.insert(paths, path)
-end
-
-local function get_webhelper_log_paths()
-    local paths = {}
-    local seen = {}
-    local steam_path = millennium.steam_path()
-
-    if steam_path and steam_path ~= "" then
-        add_unique_path(
-            paths,
-            seen,
-            fs.join(fs.join(steam_path, "logs"), "webhelper.txt")
-        )
-    end
-
-    if package.config:sub(1, 1) == "/" then
-        local user_home = os.getenv("HOME")
-
-        if user_home and user_home ~= "" then
-            add_unique_path(
-                paths,
-                seen,
-                user_home .. "/.local/share/Steam/logs/webhelper.txt"
-            )
-
-            add_unique_path(
-                paths,
-                seen,
-                user_home .. "/.steam/steam/logs/webhelper.txt"
-            )
-        end
-    end
-
-    return paths
+    local _, status = utils.exec(command)
+    return status == 0
 end
 
 ---@ffi
 ---@return boolean
 function is_developer_mode()
-    for _, log_path in ipairs(get_webhelper_log_paths()) do
-        local command_line = read_latest_webhelper_command_line(log_path)
+    local path_separator = package.config:sub(1, 1)
 
-        if command_line then
-            return contains_dev_argument(command_line)
-        end
+    if path_separator == "/" then
+        return detect_linux_developer_mode()
+    end
+
+    if path_separator == "\\" then
+        return detect_windows_developer_mode()
     end
 
     return false
