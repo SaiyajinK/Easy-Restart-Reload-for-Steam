@@ -54,12 +54,29 @@ async function waitForMenuItems(
   return [];
 }
 
+async function restartSteam(): Promise<void> {
+  try {
+    const handled = await Millennium.callServerMethod(
+      "restart_normal",
+      {},
+    );
+
+    if (handled === true) {
+      return;
+    }
+  } catch (error: unknown) {
+    console.error("Unable to restart Steam through backend:", error);
+  }
+
+  steamWindow.SteamClient?.User?.StartRestart?.(true);
+}
+
 async function restartDeveloperMode(): Promise<void> {
   try {
-	await Millennium.callServerMethod(
-	  "restart_developer_mode",
-	  {},
-	);
+    await Millennium.callServerMethod(
+      "restart_developer_mode",
+      {},
+    );
   } catch (error: unknown) {
     console.error("Unable to restart Steam in developer mode:", error);
   }
@@ -100,7 +117,7 @@ async function injectRootMenuItems(
         quitItem,
         await translate("restart", documentRef),
         "restart",
-        () => steamWindow.SteamClient?.User?.StartRestart?.(true),
+        () => void restartSteam(),
       ),
     );
   }
