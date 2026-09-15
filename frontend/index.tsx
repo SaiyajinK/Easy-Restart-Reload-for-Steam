@@ -62,11 +62,17 @@ async function waitForMenuItems(
 
 async function isDeveloperMode(): Promise<boolean> {
   try {
-    return Boolean(
+    const result =
       await Millennium.callServerMethod(
         "is_developer_mode",
         {},
-      ),
+      );
+
+    return (
+      result === true ||
+      result === 1 ||
+      result === "true" ||
+      result === "1"
     );
   } catch (error: unknown) {
     console.error(
