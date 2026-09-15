@@ -276,6 +276,25 @@ function restart_developer_mode()
     return result_code > 32
 end
 
+local function current_linux_session_uses_developer_mode()
+    local script = table.concat({
+        "for process in /proc/[0-9]*; do",
+        "[ -r \"$process/comm\" ] || continue;",
+        "[ \"$(cat \"$process/comm\" 2>/dev/null)\" = \"steam\" ] || continue;",
+        "tr '\\0' '\\n' < \"$process/cmdline\" 2>/dev/null",
+        "| grep -Fqx -- '-dev' && exit 0;",
+        "done;",
+        "exit 1",
+    }, " ")
+
+    local command =
+        "/bin/sh -c "
+        .. quote_shell_arg(script)
+
+    local _, status = utils.exec(command)
+    return status == 0
+end
+
 local function current_windows_session_uses_developer_mode()
     local system_root = os.getenv("SystemRoot") or "C:\\Windows"
     local powershell =
@@ -312,6 +331,10 @@ function restart_current_session()
 
     -- Keep the existing Linux behavior unchanged.
     if path_separator == "/" then
+        if current_linux_session_uses_developer_mode() then
+            return restart_developer_mode()
+        end
+
         return restart_normal()
     end
 
