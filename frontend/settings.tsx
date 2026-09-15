@@ -1,4 +1,4 @@
-import { ConfirmModal, Field, Toggle, showModal } from "@steambrew/client";s
+import { ConfirmModal, Field, Toggle, showModal } from "@steambrew/client";
 import { useEffect, useRef, useState } from "react";
 import { getLanguageKey, TEXT } from "./i18n";
 
