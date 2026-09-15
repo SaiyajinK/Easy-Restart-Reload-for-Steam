@@ -1,4 +1,4 @@
-import { ControlsList, Field, Toggle } from "@steambrew/client";
+import { Field, Toggle } from "@steambrew/client";
 import { useEffect, useState } from "react";
 import { getLanguageKey, TEXT } from "./i18n";
 
@@ -90,6 +90,31 @@ export function SettingsPanel() {
 
   return (
     <div>
+      <style>{`
+        .easy-restart-developer-group {
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+        }
+
+        .easy-restart-developer-group > .easy-restart-developer-field {
+          box-sizing: border-box;
+          width: 100%;
+          margin: 0 !important;
+        }
+
+        .easy-restart-developer-group > .easy-restart-developer-field:first-child {
+          border-bottom-left-radius: 0 !important;
+          border-bottom-right-radius: 0 !important;
+        }
+
+        .easy-restart-developer-group > .easy-restart-developer-field:last-child {
+          margin-top: -1px !important;
+          border-top-left-radius: 0 !important;
+          border-top-right-radius: 0 !important;
+        }
+      `}</style>
+
       <Field
         label={labels.reload}
         description={labels.reloadDescription}
@@ -110,8 +135,9 @@ export function SettingsPanel() {
         />
       </Field>
 
-      <ControlsList>
+      <div className="easy-restart-developer-group">
         <Field
+          className="easy-restart-developer-field"
           label={labels.developerRestart}
           description={labels.developerRestartDescription}
           bottomSeparator="standard"
@@ -123,6 +149,7 @@ export function SettingsPanel() {
         </Field>
 
         <Field
+          className="easy-restart-developer-field"
           label={labels.alwaysDeveloperRestart}
           description={labels.alwaysDeveloperRestartDescription}
         >
@@ -131,7 +158,7 @@ export function SettingsPanel() {
             onChange={(checked) => update("alwaysDeveloperRestart", checked)}
           />
         </Field>
-      </ControlsList>
+      </div>
     </div>
   );
 }
