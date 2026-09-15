@@ -1,6 +1,6 @@
 import { ConfirmModal, Field, Toggle, showModal } from "@steambrew/client";
 import { useEffect, useRef, useState } from "react";
-import { getLanguageKey, TEXT } from "./i18n";
+import { getLanguageKey, TEXT, type TranslationSet } from "./i18n";
 
 export interface ActionSettings {
   showReload: boolean;
@@ -18,6 +18,12 @@ export const DEFAULT_SETTINGS: ActionSettings = {
 
 const SETTINGS_KEY =
   "easy-restart-reload-for-steam.settings.v1.5";
+
+const APPLIED_DEVELOPER_RESTART_KEY =
+  "easy-restart-reload-for-steam.developer-restart.applied.v1.5";
+
+const MODAL_STYLE_ID =
+  "easy-restart-reload-confirm-modal-style";
 
 export function readSettings(): ActionSettings {
   try {
@@ -57,6 +63,35 @@ export function readSettings(): ActionSettings {
   }
 }
 
+export function readAppliedDeveloperRestartSetting(): boolean {
+  const configuredValue =
+    readSettings().showDeveloperRestart;
+
+  try {
+    const storedValue =
+      window.sessionStorage.getItem(
+        APPLIED_DEVELOPER_RESTART_KEY,
+      );
+
+    if (storedValue === "true") {
+      return true;
+    }
+
+    if (storedValue === "false") {
+      return false;
+    }
+
+    window.sessionStorage.setItem(
+      APPLIED_DEVELOPER_RESTART_KEY,
+      configuredValue ? "true" : "false",
+    );
+
+    return configuredValue;
+  } catch {
+    return configuredValue;
+  }
+}
+
 function saveSettings(settings: ActionSettings): void {
   try {
     window.localStorage.setItem(
@@ -68,6 +103,128 @@ function saveSettings(settings: ActionSettings): void {
   }
 }
 
+function ensureModalStyles(): void {
+  if (document.getElementById(MODAL_STYLE_ID)) {
+    return;
+  }
+
+  const style = document.createElement("style");
+
+  style.id = MODAL_STYLE_ID;
+  style.textContent = `
+    .easy-restart-reload-confirm-modal,
+    .easy-restart-reload-confirm-modal-root {
+      flex: none !important;
+      height: auto !important;
+      min-height: 0 !important;
+      max-height: calc(100vh - 64px) !important;
+    }
+
+    [class*="DialogContentTransition"]:has(
+      .easy-restart-reload-confirm-modal-root
+    ) {
+      flex: none !important;
+      height: auto !important;
+      min-height: 0 !important;
+      max-height: calc(100vh - 64px) !important;
+    }
+
+    .easy-restart-reload-confirm-modal-root
+      [class*="DialogContent_InnerWidth"],
+    .easy-restart-reload-confirm-modal-root
+      [class*="DialogBody"],
+    .easy-restart-reload-confirm-modal-root
+      [class*="DialogInnerBody"] {
+      flex: none !important;
+      height: auto !important;
+      min-height: 0 !important;
+      overflow: visible !important;
+    }
+
+    .easy-restart-reload-confirm-modal-root
+      [class*="DialogFooter"] {
+      margin-top: 16px !important;
+      padding-top: 0 !important;
+    }
+  `;
+
+  document.head.appendChild(style);
+}
+
+async function restartSteamFromSettings(): Promise<void> {
+  const settings = readSettings();
+
+  try {
+    if (
+      settings.showDeveloperRestart &&
+      settings.alwaysDeveloperRestart
+    ) {
+      await Millennium.callServerMethod(
+        "restart_developer_mode",
+        {},
+      );
+    } else {
+      await Millennium.callServerMethod(
+        "restart_normal",
+        {},
+      );
+    }
+  } catch (error: unknown) {
+    console.error(
+      "Unable to restart Steam after changing settings:",
+      error,
+    );
+  }
+}
+
+function showSettingsChangeModal(
+  labels: TranslationSet,
+  requiredAction: "reload" | "restart",
+): void {
+  ensureModalStyles();
+
+  const restartRequired =
+    requiredAction === "restart";
+
+  showModal(
+    <ConfirmModal
+      className="easy-restart-reload-confirm-modal-root"
+      modalClassName="easy-restart-reload-confirm-modal"
+      strTitle={
+        restartRequired
+          ? labels.restartRequiredTitle
+          : labels.reloadRequiredTitle
+      }
+      strDescription={
+        restartRequired
+          ? labels.restartRequiredDescription
+          : labels.reloadRequiredDescription
+      }
+      strOKButtonText={
+        restartRequired
+          ? labels.restartNow
+          : labels.reloadNow
+      }
+      strCancelButtonText={labels.cancel}
+      onOK={() => {
+        if (restartRequired) {
+          void restartSteamFromSettings();
+          return;
+        }
+
+        window.location.reload();
+      }}
+      onCancel={() => undefined}
+    />,
+    window,
+    {
+      strTitle: restartRequired
+        ? labels.restartRequiredTitle
+        : labels.reloadRequiredTitle,
+    },
+  );
+}
+
 export function SettingsPanel() {
   const [settings, setSettings] =
     useState<ActionSettings>(() => readSettings());
@@ -75,10 +232,24 @@ export function SettingsPanel() {
   const [language, setLanguage] =
     useState("english");
 
-  const settingsChangedRef = useRef(false);
-  const labelsRef = useRef(TEXT.english);
+  const latestSettingsRef =
+    useRef(settings);
 
-  const labels = TEXT[language] || TEXT.english;
+  const appliedDeveloperRestartRef =
+    useRef(
+      readAppliedDeveloperRestartSetting(),
+    );
+
+  const reloadRequiredRef =
+    useRef(false);
+
+  const labelsRef =
+    useRef(TEXT.english);
+
+  const labels =
+    TEXT[language] || TEXT.english;
+
+  latestSettingsRef.current = settings;
   labelsRef.current = labels;
 
   useEffect(() => {
@@ -99,38 +270,25 @@ export function SettingsPanel() {
 
   useEffect(() => {
     return () => {
-      if (!settingsChangedRef.current) {
+      const restartRequired =
+        latestSettingsRef.current
+          .showDeveloperRestart !==
+        appliedDeveloperRestartRef.current;
+
+      if (
+        !restartRequired &&
+        !reloadRequiredRef.current
+      ) {
         return;
       }
 
-      settingsChangedRef.current = false;
+      reloadRequiredRef.current = false;
 
-      const currentLabels = labelsRef.current;
-
-      showModal(
-        <ConfirmModal
-          strTitle={
-            currentLabels.reloadRequiredTitle
-          }
-          strDescription={
-            currentLabels.reloadRequiredDescription
-          }
-          strOKButtonText={
-            currentLabels.reloadNow
-          }
-          strCancelButtonText={
-            currentLabels.cancel
-          }
-          onOK={() => {
-            window.location.reload();
-          }}
-          onCancel={() => undefined}
-        />,
-        window,
-        {
-          strTitle:
-            currentLabels.reloadRequiredTitle,
-        },
+      showSettingsChangeModal(
+        labelsRef.current,
+        restartRequired
+          ? "restart"
+          : "reload",
       );
     };
   }, []);
@@ -148,7 +306,11 @@ export function SettingsPanel() {
       [key]: value,
     };
 
-    settingsChangedRef.current = true;
+    if (key !== "showDeveloperRestart") {
+      reloadRequiredRef.current = true;
+    }
+
+    latestSettingsRef.current = next;
     setSettings(next);
     saveSettings(next);
   };
