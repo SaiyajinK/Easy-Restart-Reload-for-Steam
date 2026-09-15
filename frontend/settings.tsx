@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { getLanguageKey, TEXT } from "./i18n";
 
 export interface ActionSettings {
-  showReload: boolean;
+  showReload: boolean;s
   showRestart: boolean;
   showDeveloperRestart: boolean;
   alwaysDeveloperRestart: boolean;
