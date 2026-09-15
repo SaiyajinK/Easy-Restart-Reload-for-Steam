@@ -35,6 +35,15 @@ function createMenuItem(
   return item;
 }
 
+function removeLocalSessionSuffix(
+  label: string,
+): string {
+  return label.replace(
+    /\s*[\(（][^\)）]*[\)）]\s*$/,
+    "",
+  );
+}
+
 async function waitForMenuItems(
   documentRef: Document,
 ): Promise<NodeListOf<Element> | Element[]> {
@@ -213,12 +222,17 @@ async function injectRootMenuItems(
   }
 
   if (developerRestartEnabled) {
+    const developerRestartLabel =
+      await translate(
+        "developerRestart",
+        documentRef,
+      );
+
     injectedItems.push(
       createMenuItem(
         quitItem,
-        await translate(
-          "developerRestart",
-          documentRef,
+        removeLocalSessionSuffix(
+          developerRestartLabel,
         ),
         "developer-restart",
         () =>
