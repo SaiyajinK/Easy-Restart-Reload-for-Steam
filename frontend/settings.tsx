@@ -1,5 +1,5 @@
-import { Field, Toggle } from "@steambrew/client";
-import { useEffect, useState } from "react";
+import { ConfirmModal, Field, Toggle, showModal } from "@steambrew/client";
+import { useEffect, useRef, useState } from "react";
 import { getLanguageKey, TEXT } from "./i18n";
 
 export interface ActionSettings {
@@ -16,17 +16,20 @@ export const DEFAULT_SETTINGS: ActionSettings = {
   alwaysDeveloperRestart: false,
 };
 
-const SETTINGS_KEY = "easy-restart-reload-for-steam.settings.v1.5";
+const SETTINGS_KEY =
+  "easy-restart-reload-for-steam.settings.v1.5";
 
 export function readSettings(): ActionSettings {
   try {
-    const stored = window.localStorage.getItem(SETTINGS_KEY);
+    const stored =
+      window.localStorage.getItem(SETTINGS_KEY);
 
     if (!stored) {
       return { ...DEFAULT_SETTINGS };
     }
 
-    const parsed = JSON.parse(stored) as Partial<ActionSettings>;
+    const parsed =
+      JSON.parse(stored) as Partial<ActionSettings>;
 
     return {
       showReload:
@@ -56,39 +59,107 @@ export function readSettings(): ActionSettings {
 
 function saveSettings(settings: ActionSettings): void {
   try {
-    window.localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
+    window.localStorage.setItem(
+      SETTINGS_KEY,
+      JSON.stringify(settings),
+    );
   } catch {
     // Keep the plugin usable even if persistent storage is unavailable.
   }
 }
 
 export function SettingsPanel() {
-  const [settings, setSettings] = useState<ActionSettings>(() => readSettings());
-  const [language, setLanguage] = useState("english");
+  const [settings, setSettings] =
+    useState<ActionSettings>(() => readSettings());
+
+  const [language, setLanguage] =
+    useState("english");
+
+  const settingsChangedRef = useRef(false);
+  const labelsRef = useRef(TEXT.english);
+
+  const labels = TEXT[language] || TEXT.english;
+  labelsRef.current = labels;
 
   useEffect(() => {
     let mounted = true;
 
-    void getLanguageKey(document).then((languageKey) => {
-      if (mounted) {
-        setLanguage(languageKey);
-      }
-    });
+    void getLanguageKey(document).then(
+      (languageKey) => {
+        if (mounted) {
+          setLanguage(languageKey);
+        }
+      },
+    );
 
     return () => {
       mounted = false;
     };
   }, []);
 
-  const labels = TEXT[language] || TEXT.english;
+  useEffect(() => {
+    return () => {
+      if (!settingsChangedRef.current) {
+        return;
+      }
 
-  const update = (key: keyof ActionSettings, value: boolean) => {
-    const next = { ...settings, [key]: value };
+      settingsChangedRef.current = false;
+
+      const currentLabels = labelsRef.current;
+
+      showModal(
+        <ConfirmModal
+          strTitle={
+            currentLabels.reloadRequiredTitle
+          }
+          strDescription={
+            currentLabels.reloadRequiredDescription
+          }
+          strOKButtonText={
+            currentLabels.reloadNow
+          }
+          strCancelButtonText={
+            currentLabels.cancel
+          }
+          onOK={() => {
+            window.location.reload();
+          }}
+          onCancel={() => undefined}
+        />,
+        window,
+        {
+          strTitle:
+            currentLabels.reloadRequiredTitle,
+        },
+      );
+    };
+  }, []);
+
+  const update = (
+    key: keyof ActionSettings,
+    value: boolean,
+  ) => {
+    if (settings[key] === value) {
+      return;
+    }
+
+    const next = {
+      ...settings,
+      [key]: value,
+    };
+
+    settingsChangedRef.current = true;
     setSettings(next);
     saveSettings(next);
   };
 
-  const developerRestartDisabled = !settings.showDeveloperRestart;
+  const developerRestartDisabled =
+    !settings.showDeveloperRestart;
+
+  const dependentTextClass =
+    developerRestartDisabled
+      ? "easy-restart-dependent-text easy-restart-dependent-text-disabled"
+      : "easy-restart-dependent-text";
 
   return (
     <div>
@@ -100,21 +171,46 @@ export function SettingsPanel() {
           margin-top: 6px;
         }
 
-        .easy-restart-developer-group > .easy-restart-developer-field {
+        .easy-restart-developer-group
+          > .easy-restart-developer-field {
           box-sizing: border-box;
           width: 100%;
           margin: 0 !important;
         }
 
-        .easy-restart-developer-group > .easy-restart-developer-field:first-child {
+        .easy-restart-developer-group
+          > .easy-restart-developer-field:first-child {
           border-bottom-left-radius: 0 !important;
           border-bottom-right-radius: 0 !important;
         }
 
-        .easy-restart-developer-group > .easy-restart-developer-field:last-child {
+        .easy-restart-developer-group
+          > .easy-restart-developer-field:last-child {
           margin-top: -1px !important;
           border-top-left-radius: 0 !important;
           border-top-right-radius: 0 !important;
+        }
+
+        .easy-restart-dependent-text {
+          font-size: inherit !important;
+          line-height: inherit !important;
+          transform: none !important;
+          transition: none !important;
+          opacity: 1;
+        }
+
+        .easy-restart-dependent-text-disabled {
+          opacity: 0.5;
+        }
+
+        .easy-restart-dependent-description {
+          display: block;
+        }
+
+        .easy-restart-dependent-note {
+          display: block;
+          margin-top: 8px;
+          white-space: pre-line;
         }
       `}</style>
 
@@ -124,7 +220,9 @@ export function SettingsPanel() {
       >
         <Toggle
           value={settings.showReload}
-          onChange={(checked) => update("showReload", checked)}
+          onChange={(checked) =>
+            update("showReload", checked)
+          }
         />
       </Field>
 
@@ -134,7 +232,9 @@ export function SettingsPanel() {
       >
         <Toggle
           value={settings.showRestart}
-          onChange={(checked) => update("showRestart", checked)}
+          onChange={(checked) =>
+            update("showRestart", checked)
+          }
         />
       </Field>
 
@@ -142,25 +242,56 @@ export function SettingsPanel() {
         <Field
           className="easy-restart-developer-field"
           label={labels.developerRestart}
-          description={labels.developerRestartDescription}
+          description={
+            labels.developerRestartDescription
+          }
           bottomSeparator="standard"
         >
           <Toggle
             value={settings.showDeveloperRestart}
-            onChange={(checked) => update("showDeveloperRestart", checked)}
+            onChange={(checked) =>
+              update(
+                "showDeveloperRestart",
+                checked,
+              )
+            }
           />
         </Field>
 
         <Field
           className="easy-restart-developer-field"
-          label={labels.alwaysDeveloperRestart}
-          description={labels.alwaysDeveloperRestartDescription}
-          disabled={developerRestartDisabled}
+          label={
+            <span className={dependentTextClass}>
+              {labels.alwaysDeveloperRestart}
+            </span>
+          }
+          description={
+            <span className={dependentTextClass}>
+              <span className="easy-restart-dependent-description">
+                {
+                  labels.alwaysDeveloperRestartDescription
+                }
+              </span>
+
+              <span className="easy-restart-dependent-note">
+                {
+                  labels.alwaysDeveloperRestartNote
+                }
+              </span>
+            </span>
+          }
         >
           <Toggle
-            value={settings.alwaysDeveloperRestart}
+            value={
+              settings.alwaysDeveloperRestart
+            }
             disabled={developerRestartDisabled}
-            onChange={(checked) => update("alwaysDeveloperRestart", checked)}
+            onChange={(checked) =>
+              update(
+                "alwaysDeveloperRestart",
+                checked,
+              )
+            }
           />
         </Field>
       </div>
