@@ -88,6 +88,8 @@ export function SettingsPanel() {
     saveSettings(next);
   };
 
+  const developerRestartDisabled = !settings.showDeveloperRestart;
+
   return (
     <div>
       <style>{`
@@ -153,9 +155,11 @@ export function SettingsPanel() {
           className="easy-restart-developer-field"
           label={labels.alwaysDeveloperRestart}
           description={labels.alwaysDeveloperRestartDescription}
+          disabled={developerRestartDisabled}
         >
           <Toggle
             value={settings.alwaysDeveloperRestart}
+            disabled={developerRestartDisabled}
             onChange={(checked) => update("alwaysDeveloperRestart", checked)}
           />
         </Field>
