@@ -214,7 +214,7 @@ function CompactModalDescription({
     const marker = markerRef.current;
 
     if (!marker) {
-      return;
+      return undefined;
     }
 
     const dialogBody =
