@@ -1,4 +1,4 @@
-import { Field, Toggle } from "@steambrew/client";
+import { Field, Toggle } from "@steambrew/client";s
 import { useEffect, useState } from "react";
 import { getLanguageKey, TEXT } from "./i18n";
 
