@@ -13,16 +13,6 @@ interface SteamWindowInfo {
   };
 }
 
-interface SteamClientWindow extends Window {
-  SteamClient?: {
-    User?: {
-      StartRestart?: (force: boolean) => void;
-    };
-  };
-}
-
-const steamWindow = window as SteamClientWindow;
-
 function createMenuItem(
   template: Element,
   label: string,
@@ -55,21 +45,23 @@ async function waitForMenuItems(
 }
 
 async function restartSteam(): Promise<void> {
-  const isLinux =
-    navigator.userAgent.toLowerCase().includes("linux") ||
-    navigator.platform.toLowerCase().includes("linux");
+  const settings = readSettings();
 
-  if (isLinux) {
-    try {
-      await Millennium.callServerMethod("restart_normal", {});
-    } catch (error: unknown) {
-      console.error("Unable to restart Steam on Linux:", error);
+  try {
+    if (settings.alwaysDeveloperRestart) {
+      await Millennium.callServerMethod(
+        "restart_developer_mode",
+        {},
+      );
+    } else {
+      await Millennium.callServerMethod(
+        "restart_normal",
+        {},
+      );
     }
-
-    return;
+  } catch (error: unknown) {
+    console.error("Unable to restart Steam:", error);
   }
-
-  steamWindow.SteamClient?.User?.StartRestart?.(true);
 }
 
 async function restartDeveloperMode(): Promise<void> {
