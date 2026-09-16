@@ -276,20 +276,8 @@ function restart_developer_mode()
     return result_code > 32
 end
 
-local function current_windows_session_uses_developer_mode()
-    local system_root = os.getenv("SystemRoot") or "C:\\Windows"
-    local powershell =
-        system_root
-        .. "\\System32\\WindowsPowerShell\\v1.0\\powershell.exe"
-
 local function current_linux_session_uses_developer_mode()
     local script = table.concat({
-        "$steamProcesses = Get-WmiObject -Class Win32_Process",
-        "-Filter 'Name = ''steam.exe''';",
-        "foreach ($steamProcess in $steamProcesses) {",
-        "$commandLine = [string]$steamProcess.CommandLine;",
-        "if ($commandLine -match '(?i)(?:^|\\s)-dev(?:$|\\s)') { exit 0 }",
-        "};",
         "for process in /proc/[0-9]*; do",
         "[ -r \"$process/comm\" ] || continue;",
         "[ \"$(cat \"$process/comm\" 2>/dev/null)\" = \"steam\" ] || continue;",
@@ -299,14 +287,6 @@ local function current_linux_session_uses_developer_mode()
         "exit 1",
     }, " ")
 
-    local command = table.concat({
-        quote_arg(powershell),
-        "-NoLogo",
-        "-NoProfile",
-        "-NonInteractive",
-        "-WindowStyle Hidden",
-        "-Command " .. quote_arg(script),
-    }, " ")
     local command =
         "/bin/sh -c "
         .. quote_shell_arg(script)
@@ -320,7 +300,6 @@ end
 function restart_current_session()
     local path_separator = package.config:sub(1, 1)
 
-    -- Keep the existing Linux behavior unchanged.
     if path_separator == "/" then
         if current_linux_session_uses_developer_mode() then
             return restart_developer_mode()
@@ -331,10 +310,6 @@ function restart_current_session()
 
     if path_separator ~= "\\" then
         return false
-    end
-
-    if current_windows_session_uses_developer_mode() then
-        return restart_developer_mode()
     end
 
     return restart_normal()
