@@ -19,6 +19,16 @@ interface SteamWindowInfo {
   };
 }
 
+interface SteamClientWindow extends Window {
+  SteamClient?: {
+    User?: {
+      StartRestart?: (force: boolean) => void;
+    };
+  };
+}
+
+const steamWindow = window as SteamClientWindow;
+
 function createMenuItem(
   template: Element,
   label: string,
@@ -80,6 +90,19 @@ async function restartSteam(): Promise<void> {
         );
       }
     } else {
+      if (
+        navigator.platform
+          .toLowerCase()
+          .startsWith("win") &&
+        steamWindow.SteamClient?.User
+          ?.StartRestart
+      ) {
+        steamWindow.SteamClient.User.StartRestart(
+          true,
+        );
+        return;
+      }
+
       await Millennium.callServerMethod(
         "restart_current_session",
         {},
