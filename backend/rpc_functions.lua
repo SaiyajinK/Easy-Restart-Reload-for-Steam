@@ -276,31 +276,13 @@ function restart_developer_mode()
     return result_code > 32
 end
 
-local function current_linux_session_uses_developer_mode()
-    local script = table.concat({
-        "for process in /proc/[0-9]*; do",
-        "[ -r \"$process/comm\" ] || continue;",
-        "[ \"$(cat \"$process/comm\" 2>/dev/null)\" = \"steam\" ] || continue;",
-        "tr '\\0' '\\n' < \"$process/cmdline\" 2>/dev/null",
-        "| grep -Fqx -- '-dev' && exit 0;",
-        "done;",
-        "exit 1",
-    }, " ")
-
-    local command =
-        "/bin/sh -c "
-        .. quote_shell_arg(script)
-
-    local _, status = utils.exec(command)
-    return status == 0
-end
-
 local function current_windows_session_uses_developer_mode()
     local system_root = os.getenv("SystemRoot") or "C:\\Windows"
     local powershell =
         system_root
         .. "\\System32\\WindowsPowerShell\\v1.0\\powershell.exe"
 
+local function current_linux_session_uses_developer_mode()
     local script = table.concat({
         "$steamProcesses = Get-WmiObject -Class Win32_Process",
         "-Filter 'Name = ''steam.exe''';",
@@ -308,6 +290,12 @@ local function current_windows_session_uses_developer_mode()
         "$commandLine = [string]$steamProcess.CommandLine;",
         "if ($commandLine -match '(?i)(?:^|\\s)-dev(?:$|\\s)') { exit 0 }",
         "};",
+        "for process in /proc/[0-9]*; do",
+        "[ -r \"$process/comm\" ] || continue;",
+        "[ \"$(cat \"$process/comm\" 2>/dev/null)\" = \"steam\" ] || continue;",
+        "tr '\\0' '\\n' < \"$process/cmdline\" 2>/dev/null",
+        "| grep -Fqx -- '-dev' && exit 0;",
+        "done;",
         "exit 1",
     }, " ")
 
@@ -319,6 +307,9 @@ local function current_windows_session_uses_developer_mode()
         "-WindowStyle Hidden",
         "-Command " .. quote_arg(script),
     }, " ")
+    local command =
+        "/bin/sh -c "
+        .. quote_shell_arg(script)
 
     local _, status = utils.exec(command)
     return status == 0
