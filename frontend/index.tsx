@@ -230,7 +230,7 @@ async function injectRootMenuItems(
 
     separator.style.height = ".5px";
     separator.style.background =
-      "rgba(19, 19, 19, .85)";
+      "#67707b";
 
     separator.style.pointerEvents =
       "none";
